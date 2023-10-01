@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { WebLayoutComponent } from './layouts/web-layout/web-layout.component';
 import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
+import { DashboardHeaderComponent } from './shared/dashboard-header/dashboard-header.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-l
     AuthLayoutComponent,
     WebLayoutComponent,
     DashboardLayoutComponent,
+    DashboardHeaderComponent,
   ],
   imports: [
     BrowserModule,

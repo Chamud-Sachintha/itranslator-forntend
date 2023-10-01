@@ -1,52 +1,46 @@
-<div class="login-area">
-    <div class="container">
-        <div class="login-box ptb--100">
-            <form>
-                <div class="login-form-head">
-                    <h4>Sign up</h4>
-                    <p>Hello there, Sign up and Join with Us</p>
+<body>
+    <!-- ============================================================== -->
+    <!-- signup form  -->
+    <!-- ============================================================== -->
+    <form class="splash-container">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="mb-1">Registrations Form</h3>
+                <p>Please enter your user information.</p>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <input class="form-control form-control-lg" type="text" name="nick" required="" placeholder="Username" autocomplete="off">
                 </div>
-                <div class="login-form-body">
-                    <div class="form-gp">
-                        <!-- <label for="exampleInputName1">Full Name</label> -->
-                        <input type="text" placeholder="Enter First Name">
-                        <i class="ti-user"></i>
-                        <div class="text-danger"></div>
-                    </div>
-                    <div class="form-gp">
-                        <!-- <label for="exampleInputEmail1">Email address</label> -->
-                        <input type="email" placeholder="Enter Email Address">
-                        <i class="ti-email"></i>
-                        <div class="text-danger"></div>
-                    </div>
-                    <div class="form-gp">
-                        <!-- <label for="exampleInputPassword1">Password</label> -->
-                        <input type="password" placeholder="Enter Password">
-                        <i class="ti-lock"></i>
-                        <div class="text-danger"></div>
-                    </div>
-                    <div class="form-gp">
-                        <!-- <label for="exampleInputPassword2">Confirm Password</label> -->
-                        <input type="password" placeholder="Confirm Your Password">
-                        <i class="ti-lock"></i>
-                        <div class="text-danger"></div>
-                    </div>
-                    <div class="submit-btn-area">
-                        <button id="form_submit" type="submit">Submit <i class="ti-arrow-right"></i></button>
-                        <div class="login-other row mt-4">
-                            <div class="col-6">
-                                <a class="fb-login" href="#">Sign up with <i class="fa fa-facebook"></i></a>
-                            </div>
-                            <div class="col-6">
-                                <a class="google-login" href="#">Sign up with <i class="fa fa-google"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-footer text-center mt-5">
-                        <p class="text-muted">Don't have an account? <a href="login.html">Sign in</a></p>
-                    </div>
+                <div class="form-group">
+                    <input class="form-control form-control-lg" type="email" name="email" required="" placeholder="E-mail" autocomplete="off">
                 </div>
-            </form>
+                <div class="form-group">
+                    <input class="form-control form-control-lg" id="pass1" type="password" required="" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <input class="form-control form-control-lg" required="" placeholder="Confirm">
+                </div>
+                <div class="form-group pt-2">
+                    <button class="btn btn-block btn-primary" type="submit">Register My Account</button>
+                </div>
+                <!-- <div class="form-group">
+                    <label class="custom-control custom-checkbox">
+                        <input class="custom-control-input" type="checkbox"><span class="custom-control-label">By creating an account, you agree the <a href="#">terms and conditions</a></span>
+                    </label>
+                </div>
+                <div class="form-group row pt-0">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-2">
+                        <button class="btn btn-block btn-social btn-facebook " type="button">Facebook</button>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <button class="btn  btn-block btn-social btn-twitter" type="button">Twitter</button>
+                    </div>
+                </div> -->
+            </div>
+            <div class="card-footer bg-white">
+                <p>Already member? <a href="#" class="text-secondary">Login Here.</a></p>
+            </div>
         </div>
-    </div>
-</div>
+    </form>
+</body>

@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataShareService } from 'src/app/services/data/data-share.service';
@@ -13,7 +14,7 @@ export class SelectRequiredDocsComponent implements OnInit {
   enableServiceList: Service[] = [];
   serviceModel = new Service();
 
-  constructor(private router: Router, private dataShareService: DataShareService) {}
+  constructor(private router: Router, private dataShareService: DataShareService, private location: Location) {}
 
   ngOnInit() {
     
@@ -32,7 +33,11 @@ export class SelectRequiredDocsComponent implements OnInit {
 
   goToStep2() {
     this.dataShareService.setComponentValueObj(this.enableServiceList);
-    this.router.navigate(['app/select-services/step-02'])
+    this.router.navigate(['app/select-services/step-03'])
+  }
+
+  onClickPreviousBtn() {
+    this.location.back();
   }
 
 }

@@ -4,6 +4,7 @@ import { HomeComponent } from './user/home/home.component';
 import { SelectServicesComponent } from './user/select-services/select-services.component';
 import { SelectRequiredDocsComponent } from './user/select-required-docs/select-required-docs.component';
 import { UploadRequiredDocsComponent } from './user/upload-required-docs/upload-required-docs.component';
+import { MainServicesComponent } from './user/main-services/main-services.component';
 
 const routes: Routes = [
   {
@@ -30,10 +31,14 @@ const routes: Routes = [
           },
           {
             path: 'step-01',
-            component: SelectRequiredDocsComponent
+            component: MainServicesComponent
           },
           {
             path: 'step-02',
+            component: SelectRequiredDocsComponent
+          },
+          {
+            path: 'step-03',
             component: UploadRequiredDocsComponent
           }
         ]

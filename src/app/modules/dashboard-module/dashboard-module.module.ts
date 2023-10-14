@@ -9,6 +9,10 @@ import { UploadRequiredDocsComponent } from './user/upload-required-docs/upload-
 import { FormsModule } from '@angular/forms';
 import { InvoiceComponent } from './user/invoice/invoice.component';
 import { FinalComponent } from './user/final/final.component';
+import { MainServicesComponent } from './user/main-services/main-services.component';
+import { AdminUsersComponent } from './super-admin/admin-users/admin-users.component';
+import { ClientsComponent } from './super-admin/clients/clients.component';
+import { AddServiceComponent } from './super-admin/add-service/add-service.component';
 
 
 @NgModule({
@@ -18,7 +22,11 @@ import { FinalComponent } from './user/final/final.component';
     SelectRequiredDocsComponent,
     UploadRequiredDocsComponent,
     InvoiceComponent,
-    FinalComponent
+    FinalComponent,
+    MainServicesComponent,
+    AdminUsersComponent,
+    ClientsComponent,
+    AddServiceComponent
   ],
   imports: [
     CommonModule,

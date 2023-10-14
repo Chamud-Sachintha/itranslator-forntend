@@ -6,7 +6,7 @@ import { HomeComponent } from './user/home/home.component';
 import { SelectServicesComponent } from './user/select-services/select-services.component';
 import { SelectRequiredDocsComponent } from './user/select-required-docs/select-required-docs.component';
 import { UploadRequiredDocsComponent } from './user/upload-required-docs/upload-required-docs.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InvoiceComponent } from './user/invoice/invoice.component';
 import { FinalComponent } from './user/final/final.component';
 import { MainServicesComponent } from './user/main-services/main-services.component';
@@ -31,7 +31,8 @@ import { AddServiceComponent } from './super-admin/add-service/add-service.compo
   imports: [
     CommonModule,
     DashboardModuleRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class DashboardModuleModule { }

@@ -11,7 +11,7 @@ import { Service } from 'src/app/shared/models/service/service';
 })
 export class SelectRequiredDocsComponent implements OnInit {
 
-  enableServiceList: Service[] = [];
+  enableServiceList: any[] = [];
   serviceModel = new Service();
 
   constructor(private router: Router, private dataShareService: DataShareService, private location: Location) {}

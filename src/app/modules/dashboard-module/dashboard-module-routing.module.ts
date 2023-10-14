@@ -5,6 +5,9 @@ import { SelectServicesComponent } from './user/select-services/select-services.
 import { SelectRequiredDocsComponent } from './user/select-required-docs/select-required-docs.component';
 import { UploadRequiredDocsComponent } from './user/upload-required-docs/upload-required-docs.component';
 import { MainServicesComponent } from './user/main-services/main-services.component';
+import { AdminUsersComponent } from './super-admin/admin-users/admin-users.component';
+import { ClientsComponent } from './super-admin/clients/clients.component';
+import { AddServiceComponent } from './super-admin/add-service/add-service.component';
 
 const routes: Routes = [
   {
@@ -42,6 +45,21 @@ const routes: Routes = [
             component: UploadRequiredDocsComponent
           }
         ]
+      },
+
+      // super admin menu paths
+
+      {
+        path: 'admin-users',
+        component: AdminUsersComponent
+      },
+      {
+        path: 'client-management',
+        component: ClientsComponent
+      },
+      {
+        path: 'service-management',
+        component: AddServiceComponent
       }
     ]
   }

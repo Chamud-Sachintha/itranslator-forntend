@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Request } from '../models/Request/request';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-header',
@@ -13,12 +14,20 @@ export class DashboardHeaderComponent implements OnInit {
   superAdminPerm = false;
   clientPerm = false;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     setTimeout(() => {
       this.checkMenuPermissionForUser();
-    }, 600);
+    }, 500);
+  }
+
+  onClickSignOut() {
+    sessionStorage.removeItem("authToken");
+    sessionStorage.removeItem("role");
+    sessionStorage.removeItem("emailAddress");
+
+    this.router.navigate(['auth']);
   }
 
   checkMenuPermissionForUser() {

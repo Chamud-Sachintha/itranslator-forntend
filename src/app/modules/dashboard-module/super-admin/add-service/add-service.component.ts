@@ -25,7 +25,7 @@ export class AddServiceComponent implements OnInit {
     const firstPrice = this.addServiceForm.controls['firstPrice'].value;
     const secondPrice = this.addServiceForm.controls['secondPrice'].value;
     const thirdPrice = this.addServiceForm.controls['thirdPrice'].value;
-    const servicedescription = this.addServiceForm.controls['desciription'].value;
+    const servicedescription = this.addServiceForm.controls['description'].value;
 
     if (serviceName == "") {
 
@@ -36,11 +36,13 @@ export class AddServiceComponent implements OnInit {
     } else if (thirdPrice == "") {
 
     } else {
-      this.serviceModel.servicename = serviceName;
+      this.serviceModel.serviceName = serviceName;
       this.serviceModel.firstPrice = firstPrice;
       this.serviceModel.secondPrice = secondPrice;
       this.serviceModel.thirdPrice = thirdPrice;
       this.serviceModel.description = servicedescription;
+      this.serviceModel.token = sessionStorage.getItem("authToken");
+      this.serviceModel.flag = sessionStorage.getItem("role");
 
       this.serviceService.addNewService(this.serviceModel).subscribe((resp: any) => {
 

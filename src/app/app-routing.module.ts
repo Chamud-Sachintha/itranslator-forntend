@@ -7,13 +7,8 @@ import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-l
 const routes: Routes = [
   {
     path: '',
-    component: WebLayoutComponent,
-    children: [
-      {
-        path: '',
-        loadChildren: () => import("./modules/web-module/web-module.module").then(m => m.WebModuleModule)
-      }
-    ]
+    redirectTo: 'auth',
+    pathMatch: 'full'
   },
 
   {

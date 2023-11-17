@@ -16,6 +16,7 @@ export class SelectRequiredDocsComponent implements OnInit {
   enableServiceList: any[] = [];
   serviceModel = new Service();
   requestModel = new Request();
+  serviceList: Service[] = [];
 
   constructor(private router: Router, private dataShareService: DataShareService, private location: Location
             , private serviceService: ServiceService) {}
@@ -33,7 +34,9 @@ export class SelectRequiredDocsComponent implements OnInit {
       const dataList = JSON.parse(JSON.stringify(resp));
 
       if (resp.code === 1) {
-
+        dataList.data[0].forEach((eachService: Service) => {
+          this.serviceList.push(eachService)
+        })
       }
     }, (err) => {})
   }
@@ -49,9 +52,9 @@ export class SelectRequiredDocsComponent implements OnInit {
     }
   }
 
-  goToStep2() {
+  goToStep2($event: any) {
     this.dataShareService.setComponentValueObj(this.enableServiceList);
-    this.router.navigate(['app/select-services/step-03'])
+    this.router.navigate(['app/select-services/step-03']);
   }
 
   onClickPreviousBtn() {

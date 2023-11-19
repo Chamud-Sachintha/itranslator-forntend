@@ -1,22 +1,60 @@
 <h5 class="card-header">Step 2</h5>
 <div class="card-body">
-  <div class="row" *ngIf="this.nicTranslateService">
-    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+  <div class="row">
+    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12" *ngFor="let eachService of this.selectedServiceList[0]">
       <div class="card">
-        <div class="card-header">National Identity Card</div>
+        <div class="card-header">{{ eachService.serviceName }}</div>
         <div class="card-body">
           <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
+            {{ eachService.description }}
           </p>
           <div class="form-group row">
             <div class="col-8 pt-1">
-              <a href="#" data-toggle="modal" data-target="#exampleModal">Upload Documents</a>
+              <a href="#" data-toggle="modal" data-target="#exampleModal" (click)="setTranslateModalId(eachService.serviceId)">Upload Documents</a>
             </div>
             <div class="col-4 pt-1">
               <a href="#" (click)="onClickRemove()">Remove</a>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <h5 class="card-header">Additional Informations</h5>
+        <div class="card-body border-top">
+          <form>
+            <div class="row">
+              <div class="col-md-6 col-lg-6 col-sm-12">
+                <label for="">Select Delivery Time</label>
+                <select name="" id="" class="form-control">
+                  <option value="">--- Select Option ---</option>
+                  <option value="">1 Day</option>
+                </select>
+              </div>
+
+              <div class="col-md-6 col-lg-6 col-sm-12">
+                <label for="">Select Delivery Method</label>
+                <select name="" id="" class="form-control">
+                  <option value="">--- Select Option ---</option>
+                  <option value="">By Courier</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-md-6 col-lg-6 col-sm-12">
+                <label for="">Select Payment Method</label>
+                <select name="" id="" class="form-control">
+                  <option value="">--- Select Option ---</option>
+                  <option value="">Bank Deposit</option>
+                </select>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -86,7 +124,7 @@
         </a>
       </div>
       <div class="modal-body">
-        <form [formGroup]="nicTranslateForm" (ngSubmit)="onSubmitNicTranslateForm()" enctype="multipart/form-data">
+        <form [formGroup]="nicTranslateForm" (ngSubmit)="onSubmitNicTranslateForm()" enctype="multipart/form-data" *ngIf="this.nicTranslateService">
             <div class="row">
                 <div class="col-12">
                     <label for="">NIC Name</label>
@@ -114,6 +152,27 @@
                 <button type="submit" class="btn btn-primary">Save changes</button>
             </div>
         </form>
+
+        <form [formGroup]="this.bcTranslateForm" (ngSubmit)="onSubmitBirthCertificateTranslateForm()" *ngIf="this.birthCertificateTranslateService">
+          <div class="row">
+              <div class="col-12">
+                  <label for="">Name</label>
+                  <input type="text" class="form-control" placeholder="Eg. Chamud Sachintha" formControlName="name">
+              </div>
+              <div class="col-12 mt-3">
+                  <label for="">Father Name</label>
+                  <input type="text" class="form-control" placeholder="Eg. Colombo" formControlName="fatherName">
+              </div>
+              <div class="col-12 mt-3">
+                  <label for="">Mother Name</label>
+                  <input type="text" class="form-control" placeholder="Eg. 340/A Colombo" formControlName="motherName">
+              </div>
+          </div>
+          <div class="modal-footer">
+              <a href="#" class="btn btn-secondary" data-dismiss="modal">Close</a>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+      </form>
       </div>
     </div>
   </div>

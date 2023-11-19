@@ -1,7 +1,7 @@
 <h5 class="card-header">Step 1</h5>
 <div class="card-body">
     <div class="row">
-        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12" *ngFor="let eachService of this.serviceList">
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12" *ngFor="let eachService of this.serviceList; index as i">
             <div class="card">
                 <div class="card-header">
                     {{ this.eachService.serviceName }}
@@ -12,8 +12,8 @@
                         <label class="col-12 col-sm-3 col-form-label text-sm-right">Success</label>
                         <div class="col-12 col-sm-8 col-lg-6 pt-1">
                             <div class="switch-button switch-button-success">
-                                <input type="checkbox" name="nicSwitch" id="nicSwitch" (change)="onChangeToggle(1,$event)"><span>
-                            <label for="nicSwitch"></label></span>
+                                <input type="checkbox" name="{{ i + 1 }}" id="{{ i + 1 }}" (change)="onChangeToggle(eachService.serviceId,eachService.serviceName, eachService.description, $event)"><span>
+                            <label for="{{ i + 1 }}"></label></span>
                             </div>
                         </div>
                     </div>

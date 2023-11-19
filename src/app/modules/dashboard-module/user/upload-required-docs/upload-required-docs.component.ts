@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataShareService } from 'src/app/services/data/data-share.service';
+import { BCTranslateModel } from 'src/app/shared/models/BCTranslateModel/bctranslate-model';
 import { DocumentAppend } from 'src/app/shared/models/DocumentAppend/document-append';
 import { NICTranslator } from 'src/app/shared/models/TranslatorModel/nictranslator';
 
@@ -16,10 +17,13 @@ export class UploadRequiredDocsComponent implements OnInit {
 
   selectedServiceList: any[] = [];
   nicTranslateForm!: FormGroup;
+  bcTranslateForm!: FormGroup;
   nicTranslateService = false;
+  birthCertificateTranslateService = false;
   nicFrontImage = null;
   nicBackImage = null;
   nicTranslatorModel = new NICTranslator();
+  bcTranslateModel = new BCTranslateModel();
   documentAppendModel = new DocumentAppend();
   appendDocList: DocumentAppend[] = [];
 
@@ -29,20 +33,53 @@ export class UploadRequiredDocsComponent implements OnInit {
 
   ngOnInit() {
     this.dataShareService.getComponentValueObj().subscribe((data) => {
-      if (data.length != 0) {
-        this.selectedServiceList.push(data[0]);
-        localStorage.setItem("selectedData", JSON.stringify(data[0]));
-      } else if (localStorage.getItem("selectedData") != null) {
-        const data: any = localStorage.getItem("selectedData");
-        this.selectedServiceList.push(JSON.parse(data));
-      }
+      this.selectedServiceList.push(data);
     })
 
-    if (this.selectedServiceList[0].serviceId == 1) {
-      this.nicTranslateService = true;
-    }
-
     this.initNicTranslateForm();
+    this.bcTranslateFormInit();
+  }
+
+  onSubmitBirthCertificateTranslateForm() {
+    const name = this.bcTranslateForm.controls['name'].value;
+    const fatherName = this.bcTranslateForm.controls['fatherName'].value;
+    const motherName = this.bcTranslateForm.controls['motherName'].value;
+
+    if (name == "") {
+
+    } else if (fatherName == "") {
+
+    } else if (motherName == "") {
+
+    } else {
+      this.bcTranslateModel.name = name;
+      this.bcTranslateModel.fatherName = fatherName;
+      this.bcTranslateModel.motherName = motherName;
+
+      this.documentAppendModel.bcTranslateModel = this.bcTranslateModel;
+      this.documentAppendModel.translationTitle = "BC Translation";
+      this.documentAppendModel.submitedDate = new Date();
+
+      this.appendDocList.push(this.documentAppendModel);
+    }
+  }
+
+  bcTranslateFormInit() {
+    this.bcTranslateForm = this.fromBuilder.group({
+      name: ['', Validators.required],
+      fatherName: ['', Validators.required],
+      motherName: ['', Validators.required]
+    })
+  }
+
+  setTranslateModalId(serviceId: number) {
+    if (serviceId === 1) {
+      this.nicTranslateService = true;
+      this.birthCertificateTranslateService = false;
+    } else if (serviceId == 2) {
+      this.nicTranslateService = false;
+      this.birthCertificateTranslateService = true;
+    }
   }
 
   onChangeFrontImage(event: any) {

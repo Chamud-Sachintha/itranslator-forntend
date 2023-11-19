@@ -41,11 +41,12 @@ export class SelectRequiredDocsComponent implements OnInit {
     }, (err) => {})
   }
 
-  onChangeToggle(serviceId: number, value: any) {
+  onChangeToggle(serviceId: number, serviceName: string, description: string, value: any) {
     if (value.target.checked) {
       const requestServiceModel = {
         serviceId: serviceId,
-        enable: true
+        serviceName: serviceName,
+        description: description
       }
 
       this.enableServiceList.push(requestServiceModel);

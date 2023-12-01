@@ -8,6 +8,7 @@ import { MainServicesComponent } from './user/main-services/main-services.compon
 import { AdminUsersComponent } from './super-admin/admin-users/admin-users.component';
 import { ClientsComponent } from './super-admin/clients/clients.component';
 import { AddServiceComponent } from './super-admin/add-service/add-service.component';
+import { InvoiceComponent } from './user/invoice/invoice.component';
 
 const routes: Routes = [
   {
@@ -43,6 +44,10 @@ const routes: Routes = [
           {
             path: 'step-03',
             component: UploadRequiredDocsComponent
+          },
+          {
+            path: 'step-04',
+            component: InvoiceComponent
           }
         ]
       },

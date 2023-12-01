@@ -26,35 +26,33 @@
       <div class="card">
         <h5 class="card-header">Additional Informations</h5>
         <div class="card-body border-top">
-          <form>
-            <div class="row">
-              <div class="col-md-6 col-lg-6 col-sm-12">
-                <label for="">Select Delivery Time</label>
-                <select name="" id="" class="form-control">
-                  <option value="">--- Select Option ---</option>
-                  <option value="">1 Day</option>
-                </select>
-              </div>
-
-              <div class="col-md-6 col-lg-6 col-sm-12">
-                <label for="">Select Delivery Method</label>
-                <select name="" id="" class="form-control">
-                  <option value="">--- Select Option ---</option>
-                  <option value="">By Courier</option>
-                </select>
-              </div>
+          <div class="row">
+            <div class="col-md-6 col-lg-6 col-sm-12">
+              <label for="">Select Delivery Time</label>
+              <select name="" id="" class="form-control" [(ngModel)]="this.deliveryTime">
+                <option value="">--- Select Option ---</option>
+                <option value="3">1 Day</option>
+              </select>
             </div>
 
-            <div class="row mt-3">
-              <div class="col-md-6 col-lg-6 col-sm-12">
-                <label for="">Select Payment Method</label>
-                <select name="" id="" class="form-control">
-                  <option value="">--- Select Option ---</option>
-                  <option value="">Bank Deposit</option>
-                </select>
-              </div>
+            <div class="col-md-6 col-lg-6 col-sm-12">
+              <label for="">Select Delivery Method</label>
+              <select name="" id="" class="form-control" [(ngModel)]="this.deliveryMethod">
+                <option value="">--- Select Option ---</option>
+                <option value="2">By Courier</option>
+              </select>
             </div>
-          </form>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col-md-6 col-lg-6 col-sm-12">
+              <label for="">Select Payment Method</label>
+              <select name="" id="" class="form-control" [(ngModel)]="this.paymentMethod">
+                <option value="">--- Select Option ---</option>
+                <option value="1">Bank Deposit</option>
+              </select>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -105,7 +103,7 @@
   <button class="btn btn-primary btn-sm" (click)="onClickPreviousBtn()">
     Previous
   </button>
-  <button class="btn btn-primary btn-sm" style="margin-left: 10px">Next</button>
+  <button class="btn btn-primary btn-sm" style="margin-left: 10px" (click)="onClickNextStep()">Next</button>
 </div>
 <div
   class="modal fade"
@@ -172,7 +170,81 @@
               <a href="#" class="btn btn-secondary" data-dismiss="modal">Close</a>
               <button type="submit" class="btn btn-primary">Save changes</button>
           </div>
-      </form>
+        </form>
+
+        <form [formGroup]="this.passportTranslateForm" (ngSubmit)="onSubmitPassportTranslateForm()" *ngIf="this.passportTranslateService">
+          <div class="row">
+            <div class="col-12">
+              <label for="">Front Image:</label>
+              <input type="file" class="form-control" (change)="onChangePassportFrontImage($event)">
+            </div>
+            <div class="col-12">
+              <label for="">Back Image:</label>
+              <input type="file" class="from-control" (change)="onChangePassportBackImage($event)">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="#" class="btn btn-secondary" data-dismiss="modal">Close</a>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+
+        <form [formGroup]="this.marriageTranslateForm" *ngIf="this.marriageTranslateService">
+          <!-- male details starts here -->
+          <div class="row">
+            <div class="col-12">
+              <h6>Male Details</h6>
+              <hr>
+              <label for="">Name:</label>
+              <input type="text" class="form-control" placeholder="Saman Kumara">
+            </div>
+            <div class="col-12">
+              <label for="">Father's Name:</label>
+              <input type="text" class="form-control" placeholder="Nishantha bandara">
+            </div>
+            <div class="col-12">
+              <label for="">Residences:</label>
+              <input type="text" class="form-control" placeholder="Makola">
+            </div>
+          </div>
+          <!-- male details end here -->
+
+          <!-- female details starts here -->
+          <div class="row">
+            <div class="col-12">
+              <h6>Female Detailss</h6>
+              <hr>
+
+              <label for="">Name:</label>
+              <input type="text" class="form-control" placeholder="Saman Kumara">
+            </div>
+            <div class="col-12">
+              <label for="">Father's Name:</label>
+              <input type="text" class="form-control" placeholder="Nishantha Bandara">
+            </div>
+            <div class="col-12">
+              <label for="">Recidencies:</label>
+              <input type="text" class="form-control" placeholder="Makola">
+            </div>
+          </div>
+          <!-- femaledetails ends here -->
+
+          <div class="row">
+            <div class="col-12">
+              <label for="">Front Image:</label>
+              <input type="file" class="form-control" (change)="onChangeMariageFrontImage($event)">
+            </div>
+            <div class="col-12">
+              <label for="">Back Image:</label>
+              <input type="file" class="form-control" (change)="onChangeMariageBackImage($event)">
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <a href="#" class="btn btn-secondary" data-dismiss="modal">Close</a>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>

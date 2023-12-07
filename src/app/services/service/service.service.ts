@@ -17,7 +17,7 @@ export class ServiceService {
   }
 
   getServiceList(requestModel: Request) {
-    const path = environment.appURL + "get-service-list";
+    const path = environment.appURL + "get-tr-service-list";
     return this.http.post(path, requestModel);
   }
 }

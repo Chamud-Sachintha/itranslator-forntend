@@ -13,6 +13,7 @@ import { MainServicesComponent } from './user/main-services/main-services.compon
 import { AdminUsersComponent } from './super-admin/admin-users/admin-users.component';
 import { ClientsComponent } from './super-admin/clients/clients.component';
 import { AddServiceComponent } from './super-admin/add-service/add-service.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { AddServiceComponent } from './super-admin/add-service/add-service.compo
     CommonModule,
     DashboardModuleRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxSpinnerModule,
   ]
 })
 export class DashboardModuleModule { }

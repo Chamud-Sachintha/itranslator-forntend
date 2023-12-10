@@ -9,6 +9,7 @@ import { AdminUsersComponent } from './super-admin/admin-users/admin-users.compo
 import { ClientsComponent } from './super-admin/clients/clients.component';
 import { AddServiceComponent } from './super-admin/add-service/add-service.component';
 import { InvoiceComponent } from './user/invoice/invoice.component';
+import { NotaryServiceComponent } from './super-admin/notary-service/notary-service.component';
 
 const routes: Routes = [
   {
@@ -65,6 +66,10 @@ const routes: Routes = [
       {
         path: 'service-management',
         component: AddServiceComponent
+      },
+      {
+        path: 'notary-service',
+        component: NotaryServiceComponent
       }
     ]
   }

@@ -39,17 +39,28 @@ export class NotaryServiceComponent implements OnInit {
   onSubmitSubCategoryForm() {
     const mainCategoryId = this.subNotaryCategoryForm.controls['mainCategoryId'].value;
     const subCategoryName = this.subNotaryCategoryForm.controls['subCategoryName'].value;
-
+ 
     if (mainCategoryId == "") {
       this.tostr.error("Create Sub Category", "Main Category is Required.");
     } else if (subCategoryName == "") {
       this.tostr.error("Create Sub Category", "Sub Category Name is Required.");
     } else {
       this.subCategoryModel.token = sessionStorage.getItem("authToken");
-      this.subCategoryModel.flag = sessionStorage.getItem("flag");
+      this.subCategoryModel.flag = sessionStorage.getItem("role");
+      this.subCategoryModel.mainCategoryId = mainCategoryId;
       this.subCategoryModel.subCategoryName = subCategoryName;
 
-      
+      this.spinner.show();
+      this.notaryService.addSubNotaryServiceCategory(this.subCategoryModel).subscribe((resp: any) => {
+
+        if (resp.code === 1) {
+          this.tostr.success("Create Sub Category", "Sub Category Created Successfully.");
+        } else {
+          this.tostr.error("Create Sub Category", resp.message);
+        }
+
+        this.spinner.hide();
+      })
     }
   }
 

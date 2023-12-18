@@ -15,6 +15,8 @@ import { ClientsComponent } from './super-admin/clients/clients.component';
 import { AddServiceComponent } from './super-admin/add-service/add-service.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NotaryServiceComponent } from './super-admin/notary-service/notary-service.component';
+import { TranslateOrderRequestsComponent } from './admin-user/translate-order-requests/translate-order-requests.component';
+import { NotaryOrderRequestsComponent } from './admin-user/notary-order-requests/notary-order-requests.component';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import { NotaryServiceComponent } from './super-admin/notary-service/notary-serv
     AdminUsersComponent,
     ClientsComponent,
     AddServiceComponent,
-    NotaryServiceComponent
+    NotaryServiceComponent,
+    TranslateOrderRequestsComponent,
+    NotaryOrderRequestsComponent
   ],
   imports: [
     CommonModule,

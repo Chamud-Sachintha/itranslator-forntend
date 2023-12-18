@@ -10,6 +10,9 @@ import { ClientsComponent } from './super-admin/clients/clients.component';
 import { AddServiceComponent } from './super-admin/add-service/add-service.component';
 import { InvoiceComponent } from './user/invoice/invoice.component';
 import { NotaryServiceComponent } from './super-admin/notary-service/notary-service.component';
+import { TranslateOrderRequestsComponent } from './admin-user/translate-order-requests/translate-order-requests.component';
+import { SuperAdminGuard } from 'src/app/guards/super-admin/super-admin.guard';
+import { NotaryOrderRequestsComponent } from './admin-user/notary-order-requests/notary-order-requests.component';
 
 const routes: Routes = [
   {
@@ -53,11 +56,23 @@ const routes: Routes = [
         ]
       },
 
+      // admin user menu paths
+
+      {
+        path: 'translate-orders',
+        component: TranslateOrderRequestsComponent
+      },
+      {
+        path: 'notary-orders',
+        component: NotaryOrderRequestsComponent
+      },
+
       // super admin menu paths
 
       {
         path: 'admin-users',
-        component: AdminUsersComponent
+        component: AdminUsersComponent,
+        canActivate: [SuperAdminGuard]
       },
       {
         path: 'client-management',

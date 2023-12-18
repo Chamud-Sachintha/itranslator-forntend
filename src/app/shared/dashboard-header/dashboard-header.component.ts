@@ -13,6 +13,7 @@ export class DashboardHeaderComponent implements OnInit {
   requestModel = new Request();
   superAdminPerm = false;
   clientPerm = false;
+  adminUserPerm = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -38,9 +39,16 @@ export class DashboardHeaderComponent implements OnInit {
       if (resp.code === 1) {
         if (this.requestModel.flag === "SA") {
           this.superAdminPerm = true;
+          this.clientPerm = false;
+          this.adminUserPerm = false;
+        } else if (this.requestModel.flag === "A") {
+          this.superAdminPerm = false;
+          this.clientPerm = false;
+          this.adminUserPerm = true;
         } else if (this.requestModel.flag == "C") {
           this.superAdminPerm = false;
           this.clientPerm = true;
+          this.adminUserPerm = false;
         }
       }
     }, (err) => {

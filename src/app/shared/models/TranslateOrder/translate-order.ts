@@ -4,4 +4,5 @@ export class TranslateOrder {
     orderStatus!: string;
     totalAmount!: string;
     createTime!: string;
+    assignedTime!: string;
 }

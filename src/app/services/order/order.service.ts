@@ -24,4 +24,9 @@ export class OrderService {
     const path = environment.appURL + "get-ns-orders";
     return this.http.post(path, requestParamModel);
   }
+
+  getOrderInfoByInvoice(requestModel: Request) {
+    const path = environment.appURL + "get-order-info-by-invoice";
+    return this.http.post(path, requestModel);
+  }
 }

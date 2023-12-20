@@ -17,6 +17,10 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { NotaryServiceComponent } from './super-admin/notary-service/notary-service.component';
 import { TranslateOrderRequestsComponent } from './admin-user/translate-order-requests/translate-order-requests.component';
 import { NotaryOrderRequestsComponent } from './admin-user/notary-order-requests/notary-order-requests.component';
+import { TranslateTaskComponent } from './admin-user/translate-task/translate-task.component';
+import { NotaryTaskComponent } from './admin-user/notary-task/notary-task.component';
+import { TranslateOrderProcessComponent } from './admin-user/translate-order-process/translate-order-process.component';
+import { NotaryOrderProcessComponent } from './admin-user/notary-order-process/notary-order-process.component';
 
 
 @NgModule({
@@ -33,7 +37,11 @@ import { NotaryOrderRequestsComponent } from './admin-user/notary-order-requests
     AddServiceComponent,
     NotaryServiceComponent,
     TranslateOrderRequestsComponent,
-    NotaryOrderRequestsComponent
+    NotaryOrderRequestsComponent,
+    TranslateTaskComponent,
+    NotaryTaskComponent,
+    TranslateOrderProcessComponent,
+    NotaryOrderProcessComponent
   ],
   imports: [
     CommonModule,

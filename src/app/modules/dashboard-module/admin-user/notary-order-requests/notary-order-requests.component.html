@@ -43,7 +43,7 @@
                                         <td>LKR. {{ eachOrder.totalAmount }} .00</td>
                                         <td>{{ eachOrder.createTime | date }}</td>
                                         <td>
-                                            <button class="btn btn-success btn-sm">Assign to Me</button>
+                                            <button class="btn btn-success btn-sm" (click)="onClickAssignToMe(eachOrder.invoiceNo)">Assign to Me</button>
                                         </td>
                                     </tr>
                                 </tbody>

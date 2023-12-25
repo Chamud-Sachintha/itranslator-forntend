@@ -15,6 +15,8 @@ import { SuperAdminGuard } from 'src/app/guards/super-admin/super-admin.guard';
 import { NotaryOrderRequestsComponent } from './admin-user/notary-order-requests/notary-order-requests.component';
 import { TranslateTaskComponent } from './admin-user/translate-task/translate-task.component';
 import { TranslateOrderProcessComponent } from './admin-user/translate-order-process/translate-order-process.component';
+import { NotaryTaskComponent } from './admin-user/notary-task/notary-task.component';
+import { NotaryOrderProcessComponent } from './admin-user/notary-order-process/notary-order-process.component';
 
 const routes: Routes = [
   {
@@ -73,8 +75,16 @@ const routes: Routes = [
         component: TranslateTaskComponent
       },
       {
+        path: 'ns-task-list',
+        component: NotaryTaskComponent
+      },
+      {
         path: 'tr-order/:invoiceId',
         component: TranslateOrderProcessComponent
+      },
+      {
+        path: 'ns-order/:invoiceId',
+        component: NotaryOrderProcessComponent
       },
 
       // super admin menu paths

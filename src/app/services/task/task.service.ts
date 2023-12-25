@@ -14,4 +14,24 @@ export class TaskService {
     const path = environment.appURL + "get-tr-task-list";
     return this.http.post(path, requestParamModel);
   }
+
+  getNotaryServiceTaskList(requestParamModel: Request) {
+    const path = environment.appURL + "get-ns-task-list";
+    return this.http.post(path, requestParamModel)
+  }
+
+  uploadTranslatedDocuments(requestParamModel: FormData) {
+    const path = environment.appURL + "upload-translated-docs";
+    return this.http.post(path, requestParamModel);
+  }
+
+  getUploadedDocsByOrder(requestParamModel: Request) {
+    const path = environment.appURL + "get-doc-list-by-order";
+    return this.http.post(path, requestParamModel);
+  }
+
+  sendAdminOrderMessage(requestParamModel: Request) {
+    const path = environment.appURL + "send-admin-message";
+    return this.http.post(path, requestParamModel);
+  }
 }

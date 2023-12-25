@@ -1,1 +1,105 @@
-<p>notary-order-process works!</p>
+<div class="row">
+    <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-6">
+                    <h2 class="pageheader-title">Process Translate Service Order. </h2>
+                </div>
+                <div class="col-6">
+                    <h2 class="pageheader-title" style="float: right;">Invoice No - {{ this.invoiceNo }}</h2>
+                </div>
+            </div>
+            <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
+            <div class="page-breadcrumb">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">E-Commerce Dashboard Template</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <h5 class="card-header">Process Notary Service Order</h5>
+            <div class="card-body">
+                <form [formGroup]="this.paymentForm">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">පත් ඉරු පීමේෂාව / Extract Search</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">සෙවන පිටපත් පීමේෂාව / Second copy check</label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">පත් ඉරු ගැනීම / Obtain Extracts</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">සෙවන පිටපත් ගැනීම / Obtain Second copy taking</label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">සපලපත් ටහන ැකසීම / Preparation of the Title</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">ඡායාරූප ගා ්තු / Photography fees</label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">ඡායා පිටපත් ගා ්තු / Photocopy charges</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">රජසේ මුද්ෙර ගා ්තු / Government Stamp Duty</label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">ලියා පදිංචි ණීීමසම් ගා ්තු / Registration fees</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">ප්‍රවාහන ගා ්තු / Transportation charges</label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">සනොතාරි ් ගා ්තු / Notary fees</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">කයානම් ස ේවා ගා ්තු / Expedited service charges</label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">හ දන්වාදීසම් සකොමි ් / Referral commission</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">තැපැේ ගා ්තු / Postage charges</label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

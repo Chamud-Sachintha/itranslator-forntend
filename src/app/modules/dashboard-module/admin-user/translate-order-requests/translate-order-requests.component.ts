@@ -47,6 +47,7 @@ export class TranslateOrderRequestsComponent implements OnInit {
     this.requestMode.token = sessionStorage.getItem("authToken");
     this.requestMode.flag = sessionStorage.getItem("role");
     this.requestMode.invoiceNo  =invoiceNo;
+    this.requestMode.type = "TS";
 
     this.orderService.assinOrder(this.requestMode).subscribe((resp: any) => {
 

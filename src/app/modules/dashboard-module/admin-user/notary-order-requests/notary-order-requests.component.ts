@@ -41,4 +41,23 @@ export class NotaryOrderRequestsComponent implements OnInit {
     });
   }
 
+  onClickAssignToMe(invoiceNo: string) {
+    this.requestMode.token = sessionStorage.getItem("authToken");
+    this.requestMode.flag = sessionStorage.getItem("role");
+    this.requestMode.invoiceNo = invoiceNo;
+    this.requestMode.type = "NS";
+
+    this.spinner.show();
+    this.orderService.assinOrder(this.requestMode).subscribe((resp: any) => {
+
+      if (resp.code === 1) {
+        this.tostr.success("Order Assign", "Order Assign Successfully.");
+      } else {
+        this.tostr.error("Order Assign", resp.message);
+      }
+
+      this.spinner.hide();
+    })
+  }
+
 }

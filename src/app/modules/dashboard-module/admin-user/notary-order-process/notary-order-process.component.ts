@@ -42,7 +42,12 @@ export class NotaryOrderProcessComponent implements OnInit {
       forthAdvance: ['', Validators.required],
       fifthAdvance: ['', Validators.required],
       finalPayment: ['', Validators.required],
-      amountInArreas: ['', Validators.required]
+      amountInArreas: ['', Validators.required],
+      descriptionOfService: ['', Validators.required],
+      pickUpDate: ['', Validators.required],
+      dateOfSubmission: ['', Validators.required],
+      dateOfMailing: ['', Validators.required],
+      dateOfRegistration: ['', Validators.required]
     })
   }
 

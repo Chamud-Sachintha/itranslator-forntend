@@ -34,4 +34,9 @@ export class TaskService {
     const path = environment.appURL + "send-admin-message";
     return this.http.post(path, requestParamModel);
   }
+
+  getOrderMessageList(requestParamModel: Request) {
+    const path = environment.appURL + "get-order-message-list";
+    return this.http.post(path, requestParamModel);
+  }
 }

@@ -50,7 +50,7 @@
                                         <td>{{ eachRow.createTime | date }}</td>
                                         <td>{{ eachRow.assignedTime | date }}</td>
                                         <td>
-                                            <button class="btn btn-primary btn-sm">Check Documents</button>
+                                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" (click)="onClickOpenOrderDocuments(eachRow.serviceId)">Check Documents</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -105,7 +105,14 @@
                                         <td>{{ eachRow.document }}</td>
                                         <td>{{ eachRow.createTime | date }}</td>
                                         <td>
-                                            <button class="btn btn-primary btn-sm">Check Documents</button>
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <button class="btn btn-primary btn-sm">Check Documents</button>
+                                                </div>
+                                                <div class="col-6">
+                                                    <button class="btn btn-danger btn-sm" style="float: left;">Delete</button>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -132,6 +139,35 @@
                         <button class="btn btn-primary btn-sm mt-3" (click)="sendAdminMessage(message.value)">Send Message</button>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-12" style="max-height: 500px; overflow-y: scroll;">
+                        <div class="card-body">
+                            <h4 class="card-title">Recent Comments</h4>
+                            <h6 class="card-subtitle">Latest Comments section by users</h6>
+                        </div>
+        
+                        <div class="comment-widgets m-b-20" *ngFor="let eachMessage of this.orderMessageList">
+        
+                            <div class="d-flex flex-row comment-row">
+                                <div class="p-2"><span class="round"><img src="https://i.imgur.com/uIgDDDd.jpg"
+                                            alt="user" width="50"></span></div>
+                                <div class="comment-text w-100">
+                                    <h5>{{ this.eachMessage.fromUser }}</h5>
+                                    <div class="comment-footer">
+                                        <span class="date">{{ eachMessage.time | date }}</span>
+                                        <span class="label label-info">Pending</span> <span class="action-icons">
+                                            <a href="#" data-abc="true"><i class="fa fa-pencil"></i></a>
+                                            <a href="#" data-abc="true"><i class="fa fa-rotate-right"></i></a>
+                                            <a href="#" data-abc="true"><i class="fa fa-heart"></i></a>
+                                        </span>
+                                    </div>
+                                    <p class="m-b-5 m-t-10">{{ eachMessage.message }}
+                                        </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <h5 class="card-header">Additional Informations About Order</h5>
@@ -152,4 +188,70 @@
             </div>
         </div>
     </div>
+</div>
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </a>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="nicTranslateModelForm" *ngIf="this.nicTranslateModel">
+            <div class="row">
+                <div class="col-12">
+                    <label for="">NIC Name</label>
+                    <input type="text" class="form-control" formControlName="nicName">
+                </div>
+                <div class="col-12 mt-3">
+                    <label for="">Address</label>
+                    <input type="text" class="form-control" formControlName="address">
+                </div>
+                <div class="col-12 mt-3">
+                    <label for="">Birth Place</label>
+                    <input type="text" class="form-control" formControlName="birthPlace">
+                </div>
+                <div class="col-12 mt-3">
+                    <button class="btn btn-primary btn-sm" style="width: 100%;" (click)="onClickViewFrontImg()">View Front Image</button>
+                </div>
+                <div class="col-12 mt-3">
+                    <button class="btn btn-primary btn-sm" style="width: 100%;" (click)="onClickViewBackImg()">View Back Image</button>
+                </div>
+            </div>
+        </form>
+
+        <form [formGroup]="bcTranslateModelForm" *ngIf="this.bcTranslateModel">
+            <div class="row">
+                <div class="col-12">
+                    <label for="">Name</label>
+                    <input type="text" class="form-control" placeholder="Eg. Chamud Sachintha" formControlName="name">
+                </div>
+                <div class="col-12 mt-3">
+                    <label for="">Father Name</label>
+                    <input type="text" class="form-control" placeholder="Eg. Colombo" formControlName="fatherName">
+                </div>
+                <div class="col-12 mt-3">
+                    <label for="">Mother Name</label>
+                    <input type="text" class="form-control" placeholder="Eg. 340/A Colombo" formControlName="motherName">
+                </div>
+                <div class="col-12 mt-3">
+                    <button class="btn btn-primary btn-sm" style="width: 100%;" (click)="onClickViewBcFrontImage()">View Front Image</button>
+                </div>
+                <div class="col-12 mt-3">
+                    <button class="btn btn-primary btn-sm" style="width: 100%;" (click)="onClickViewBcBackImage()">View Back Image</button>
+                </div>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

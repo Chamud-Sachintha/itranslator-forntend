@@ -4,4 +4,5 @@ export class Request {
     invoiceNo!: string;
     type!: string;
     message!: string;
+    serviceId!: string;
 }

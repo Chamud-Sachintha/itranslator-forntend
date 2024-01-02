@@ -29,4 +29,9 @@ export class OrderService {
     const path = environment.appURL + "get-order-info-by-invoice";
     return this.http.post(path, requestModel);
   }
+
+  getOrderDocumentsByOrderAndService(requestModel: Request) {
+    const path = environment.appURL + "get-tr-order-docs-by-oid";
+    return this.http.post(path, requestModel);
+  }
 }

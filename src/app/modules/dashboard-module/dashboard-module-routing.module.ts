@@ -17,6 +17,7 @@ import { TranslateTaskComponent } from './admin-user/translate-task/translate-ta
 import { TranslateOrderProcessComponent } from './admin-user/translate-order-process/translate-order-process.component';
 import { NotaryTaskComponent } from './admin-user/notary-task/notary-task.component';
 import { NotaryOrderProcessComponent } from './admin-user/notary-order-process/notary-order-process.component';
+import { OrderRequestsComponent } from './super-admin/order-requests/order-requests.component';
 
 const routes: Routes = [
   {
@@ -105,6 +106,10 @@ const routes: Routes = [
       {
         path: 'notary-service',
         component: NotaryServiceComponent
+      },
+      {
+        path: 'order-requests',
+        component: OrderRequestsComponent
       }
     ]
   }

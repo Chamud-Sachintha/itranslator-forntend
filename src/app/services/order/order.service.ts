@@ -34,4 +34,9 @@ export class OrderService {
     const path = environment.appURL + "get-tr-order-docs-by-oid";
     return this.http.post(path, requestModel);
   }
+
+  getAllPendingOrdersList(requestModel: Request) {
+    const path = environment.appURL + "get-pending-order-requests";
+    return this.http.post(path, requestModel);
+  }
 }

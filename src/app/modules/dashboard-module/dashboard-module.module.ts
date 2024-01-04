@@ -21,6 +21,7 @@ import { TranslateTaskComponent } from './admin-user/translate-task/translate-ta
 import { NotaryTaskComponent } from './admin-user/notary-task/notary-task.component';
 import { TranslateOrderProcessComponent } from './admin-user/translate-order-process/translate-order-process.component';
 import { NotaryOrderProcessComponent } from './admin-user/notary-order-process/notary-order-process.component';
+import { OrderRequestsComponent } from './super-admin/order-requests/order-requests.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { NotaryOrderProcessComponent } from './admin-user/notary-order-process/n
     TranslateTaskComponent,
     NotaryTaskComponent,
     TranslateOrderProcessComponent,
-    NotaryOrderProcessComponent
+    NotaryOrderProcessComponent,
+    OrderRequestsComponent
   ],
   imports: [
     CommonModule,

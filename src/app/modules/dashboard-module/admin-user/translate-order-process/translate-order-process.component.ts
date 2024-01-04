@@ -7,6 +7,7 @@ import { Subscription, switchMap, timer } from 'rxjs';
 import { OrderService } from 'src/app/services/order/order.service';
 import { TaskService } from 'src/app/services/task/task.service';
 import { BCTranslateModel } from 'src/app/shared/models/BCTranslateModel/bctranslate-model';
+import { MCTranslateModel } from 'src/app/shared/models/MCTranslateModel/mctranslate-model';
 import { OrderMessage } from 'src/app/shared/models/OrderMessage/order-message';
 import { Request } from 'src/app/shared/models/Request/request';
 import { TranslateTask } from 'src/app/shared/models/TranslateTask/translate-task';
@@ -30,10 +31,13 @@ export class TranslateOrderProcessComponent implements OnInit {
   uploadedDocuementList: TranslatedDocument[] = [];
   nicTranslateModelForm!: FormGroup;
   bcTranslateModelForm!: FormGroup;
+  marriageTranslateForm!: FormGroup;
   nicTranslateModelObj = new NICTranslator();
   bcTranslateModelObj = new BCTranslateModel();
+  mcTranslateModelObj = new MCTranslateModel();
   nicTranslateModel = false;
   bcTranslateModel = false;
+  marriageTranslateModel = false;
 
   constructor(private activateRoute: ActivatedRoute, private orderService: OrderService, private taskService: TaskService
             , private tost: ToastrService, private spinner: NgxSpinnerService, private formBuilder: FormBuilder) {}
@@ -64,6 +68,28 @@ export class TranslateOrderProcessComponent implements OnInit {
     this.loadUploadedDocumentList();
     this.initNicTranslateModelForm();
     this.initBcTranslateModelForm();
+    this.marriageTranslateFormInit();
+  }
+
+  onClickViewMCFrontImg() {
+    const imageUrl = environment.fileServerURL + this.mcTranslateModelObj.frontImg;
+    window.open(imageUrl);
+  }
+
+  onClickViewMCBackImg() {
+    const imageUrl = environment.fileServerURL + this.mcTranslateModelObj.backImg;
+    window.open(imageUrl);
+  }
+
+  marriageTranslateFormInit() {
+    this.marriageTranslateForm = this.formBuilder.group({
+      maleName: ['', Validators.required],
+      maleFathersName: ['', Validators.required],
+      maleResidence: ['', Validators.required],
+      femaleName: ['', Validators.required],
+      femaleFathersName: ['', Validators.required],
+      femaleResidence: ['', Validators.required],
+    })
   }
 
   loadOrderMessages() {
@@ -147,6 +173,18 @@ export class TranslateOrderProcessComponent implements OnInit {
           this.bcTranslateModelForm.controls['motherName'].setValue(dataList.data[0].motherName);
           this.bcTranslateModelObj.frontImg = dataList.data[0].frontImage;
           this.bcTranslateModelObj.backImg = dataList.data[0].backImage;
+        } else if (serviceId == "3") {
+          this.nicTranslateModel = false;
+          this.bcTranslateModel = false;
+          this.marriageTranslateModel = true;
+
+          this.marriageTranslateForm.controls['maleName'].setValue(dataList.data[0].maleName);
+          this.marriageTranslateForm.controls['maleFathersName'].setValue(dataList.data[0].maleFathersName);
+          this.marriageTranslateForm.controls['maleResidence'].setValue(dataList.data[0].maleResidence);
+
+          this.marriageTranslateForm.controls['femaleName'].setValue(dataList.data[0].femaleName);
+          this.marriageTranslateForm.controls['femaleFathersName'].setValue(dataList.data[0].femaleFathersName);
+          this.marriageTranslateForm.controls['femaleResidence'].setValue(dataList.data[0].femaleResidence);
         }
 
       }
@@ -209,6 +247,7 @@ export class TranslateOrderProcessComponent implements OnInit {
 
       if (resp.code === 1) {
         this.tost.success("Submit Translated Documents.", "Document Uploading Successfully");
+        location.reload();
       } else {
         this.tost.error("Submit Translated Documents", resp.message);
       }

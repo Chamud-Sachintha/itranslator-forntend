@@ -7,9 +7,11 @@ import { Subscription, switchMap, timer } from 'rxjs';
 import { OrderService } from 'src/app/services/order/order.service';
 import { TaskService } from 'src/app/services/task/task.service';
 import { BCTranslateModel } from 'src/app/shared/models/BCTranslateModel/bctranslate-model';
+import { DCTranslateModel } from 'src/app/shared/models/DCTranslateModel/dctranslate-model';
 import { MCTranslateModel } from 'src/app/shared/models/MCTranslateModel/mctranslate-model';
 import { OrderMessage } from 'src/app/shared/models/OrderMessage/order-message';
 import { Request } from 'src/app/shared/models/Request/request';
+import { SchoolLeavingCertificateModel } from 'src/app/shared/models/SchoolLeavingCertificateModel/school-leaving-certificate-model';
 import { TranslateTask } from 'src/app/shared/models/TranslateTask/translate-task';
 import { TranslatedDocument } from 'src/app/shared/models/TranslatedDocument/translated-document';
 import { NICTranslator } from 'src/app/shared/models/TranslatorModel/nictranslator';
@@ -32,12 +34,27 @@ export class TranslateOrderProcessComponent implements OnInit {
   nicTranslateModelForm!: FormGroup;
   bcTranslateModelForm!: FormGroup;
   marriageTranslateForm!: FormGroup;
+  deathTranslateForm!: FormGroup;
+  otherDocumentTranslateForm!: FormGroup;
+  affidavitForm!: FormGroup;
+  schoolLeavingTranslateForm!: FormGroup;
+  deedForm!: FormGroup;
   nicTranslateModelObj = new NICTranslator();
   bcTranslateModelObj = new BCTranslateModel();
   mcTranslateModelObj = new MCTranslateModel();
+  dcTranslateModel = new DCTranslateModel();
+  schoolLeavingTranslateModel = new SchoolLeavingCertificateModel();
   nicTranslateModel = false;
   bcTranslateModel = false;
   marriageTranslateModel = false;
+  deathTranslateService = false;
+  schoolLeaveTranslateService = false;
+  otherDocumentTranslateService = false;
+  affidavitTranslateionService = false;
+  deedTranslationService = false;
+  otherFormImagesList: string[] = [];
+  affidavitImageList: string[] = [];
+  deedImageList: string[] = [];
 
   constructor(private activateRoute: ActivatedRoute, private orderService: OrderService, private taskService: TaskService
             , private tost: ToastrService, private spinner: NgxSpinnerService, private formBuilder: FormBuilder) {}
@@ -69,6 +86,95 @@ export class TranslateOrderProcessComponent implements OnInit {
     this.initNicTranslateModelForm();
     this.initBcTranslateModelForm();
     this.marriageTranslateFormInit();
+    this.initDCTranslateForm();
+    this.initOtherDocumenTranslateForm();
+    this.initSchoolLeavingCertificateForm();
+    this.initAffidavitForm();
+    this.initDeedForm();
+  }
+
+  initDeedForm() {
+    this.deedForm = this.formBuilder.group({
+      fullName: ['', Validators.required],
+      address: ['', Validators.required],
+      page1: ['', Validators.required],
+      page2: ['', Validators.required],
+      page3: ['', Validators.required],
+      page4: ['', Validators.required],
+      page5: ['', Validators.required],
+      page6: ['', Validators.required]
+    })
+  }
+
+  initAffidavitForm() {
+    this.affidavitForm = this.formBuilder.group({
+      fullName: ['', Validators.required],
+      address: ['', Validators.required],
+      descriptionOfService: ['', Validators.required],
+      page1: ['', Validators.required],
+      page2: ['', Validators.required],
+      page3: ['', Validators.required],
+      page4: ['', Validators.required],
+      page5: ['', Validators.required]
+    })
+  }
+
+  onClickViewSchoolLeavingFrontImage() {
+    const imageUrl = environment.fileServerURL + this.schoolLeavingTranslateModel.frontImage;
+    window.open(imageUrl);
+  }
+
+  onClickViewSchoolLeavingBackImage() {
+    const imageUrl = environment.fileServerURL + this.schoolLeavingTranslateModel.backImage;
+    window.open(imageUrl);
+  }
+
+  initSchoolLeavingCertificateForm() {
+    this.schoolLeavingTranslateForm = this.formBuilder.group({
+      fullName: ['', Validators.required],
+      schoolName: ['', Validators.required],
+      frontImage: ['', Validators.required],
+      backImage: ['', Validators.required]
+    })
+  }
+
+  onClickViewOtherImage(imageName: string) {
+    const imageUrl = environment.fileServerURL + imageName;
+    window.open(imageUrl);
+  }
+
+  initOtherDocumenTranslateForm() {
+    this.otherDocumentTranslateForm = this.formBuilder.group({
+      fullName: ['', Validators.required],
+      fatherName: ['', Validators.required],
+      motherName: ['', Validators.required],
+      image1: ['', Validators.required],
+      image2: ['', Validators.required],
+      image3: ['', Validators.required],
+      image4: ['', Validators.required],
+      image5: ['', Validators.required],
+      image6: ['', Validators.required],
+    })
+  }
+
+  initDCTranslateForm() {
+    this.deathTranslateForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      fatherName: ['', Validators.required],
+      motherName: ['', Validators.required],
+      frontImg: ['', Validators.required],
+      backImg: ['', Validators.required]
+    })
+  }
+
+  onClickViewDCFrontImage() {
+    const imageUrl = environment.fileServerURL + this.dcTranslateModel.frontImg;
+    window.open(imageUrl);
+  }
+
+  onClickViewDCBackImage() {
+    const imageUrl = environment.fileServerURL + this.dcTranslateModel.backImg;
+    window.open(imageUrl);
   }
 
   onClickViewMCFrontImg() {
@@ -90,10 +196,6 @@ export class TranslateOrderProcessComponent implements OnInit {
       femaleFathersName: ['', Validators.required],
       femaleResidence: ['', Validators.required],
     })
-  }
-
-  loadOrderMessages() {
-    this.requestMode.token
   }
 
   initBcTranslateModelForm() {
@@ -143,12 +245,13 @@ export class TranslateOrderProcessComponent implements OnInit {
   }
 
   onClickOpenOrderDocuments(serviceId: string) {
-
+    console.log(serviceId)
     this.requestMode.token = sessionStorage.getItem("authToken");
     this.requestMode.flag = sessionStorage.getItem("role");
     this.requestMode.invoiceNo = this.invoiceNo;
     this.requestMode.serviceId = serviceId;
 
+    this.spinner.show();
     this.orderService.getOrderDocumentsByOrderAndService(this.requestMode).subscribe((resp: any) => {
 
       const dataList = JSON.parse(JSON.stringify(resp));
@@ -158,6 +261,8 @@ export class TranslateOrderProcessComponent implements OnInit {
         if (serviceId == "1") {
           this.nicTranslateModel = true;
           this.bcTranslateModel = false;
+          this.deathTranslateService = false;
+          this.marriageTranslateModel = false;
 
           this.nicTranslateModelForm.controls['nicName'].setValue(dataList.data[0].nicName);
           this.nicTranslateModelForm.controls['address'].setValue(dataList.data[0].address);
@@ -167,6 +272,8 @@ export class TranslateOrderProcessComponent implements OnInit {
         } else if (serviceId == "2") {
           this.nicTranslateModel = false;
           this.bcTranslateModel = true;
+          this.deathTranslateService = false;
+          this.marriageTranslateModel = false;
 
           this.bcTranslateModelForm.controls['name'].setValue(dataList.data[0].name);
           this.bcTranslateModelForm.controls['fatherName'].setValue(dataList.data[0].fatherName);
@@ -177,6 +284,7 @@ export class TranslateOrderProcessComponent implements OnInit {
           this.nicTranslateModel = false;
           this.bcTranslateModel = false;
           this.marriageTranslateModel = true;
+          this.deathTranslateService = false;
 
           this.marriageTranslateForm.controls['maleName'].setValue(dataList.data[0].maleName);
           this.marriageTranslateForm.controls['maleFathersName'].setValue(dataList.data[0].maleFathersName);
@@ -185,8 +293,139 @@ export class TranslateOrderProcessComponent implements OnInit {
           this.marriageTranslateForm.controls['femaleName'].setValue(dataList.data[0].femaleName);
           this.marriageTranslateForm.controls['femaleFathersName'].setValue(dataList.data[0].femaleFathersName);
           this.marriageTranslateForm.controls['femaleResidence'].setValue(dataList.data[0].femaleResidence);
+        } else if (serviceId == "4") {
+          this.deathTranslateForm.controls['name'].setValue(dataList.data[0].name);
+          this.deathTranslateForm.controls['fatherName'].setValue(dataList.data[0].fatherName);
+          this.deathTranslateForm.controls['motherName'].setValue(dataList.data[0].motherName);
+          this.dcTranslateModel.frontImg = dataList.data[0].frontImg;
+          this.dcTranslateModel.backImg = dataList.data[0].backImg;
+        } else if (serviceId == "5" || serviceId == "6" || serviceId == "8" || serviceId == "10" || serviceId == "11" || serviceId == "12" || serviceId == "14") {
+          
+          this.otherFormImagesList = [];
+
+          this.nicTranslateModel = false;
+          this.bcTranslateModel = false;
+          this.deathTranslateService = false;
+          this.marriageTranslateModel = false;
+          this.otherDocumentTranslateService = true;
+
+          this.otherDocumentTranslateForm.controls['fullName'].setValue(dataList.data[0].fullName);
+          this.otherDocumentTranslateForm.controls['fatherName'].setValue(dataList.data[0].fatherName);
+          this.otherDocumentTranslateForm.controls['motherName'].setValue(dataList.data[0].motherName);
+  
+          if ("page1" in dataList.data[0]) {
+            this.otherFormImagesList.push(dataList.data[0].page1);
+          }
+
+          if ("page2" in dataList.data[0]) {
+            this.otherFormImagesList.push(dataList.data[0].page2);
+          }
+
+          if ("page3" in dataList.data[0]) {
+            this.otherFormImagesList.push(dataList.data[0].page3);
+          }
+
+          if ("page4" in dataList.data[0]) {
+            this.otherFormImagesList.push(dataList.data[0].page4);
+          }
+
+          if ("page5" in dataList.data[0]) {
+            this.otherFormImagesList.push(dataList.data[0].page5);
+          }
+
+          if ("page6" in dataList.data[0]) {
+            this.otherFormImagesList.push(dataList.data[0].page6);
+          }
+        } else if (serviceId == "7") {
+          this.nicTranslateModel = false;
+          this.bcTranslateModel = false;
+          this.deathTranslateService = false;
+          this.marriageTranslateModel = false;
+          this.otherDocumentTranslateService = false;
+          this.schoolLeaveTranslateService = true;
+
+          this.schoolLeavingTranslateForm.controls['fullName'].setValue(dataList.data[0].fullName);
+          this.schoolLeavingTranslateForm.controls['schoolName'].setValue(dataList.data[0].schoolName);
+          this.schoolLeavingTranslateModel.frontImage = dataList.data[0].frontImage;
+          this.schoolLeavingTranslateModel.backImage = dataList.data[0].backImage;
+        } else if (serviceId == "9") {
+
+          this.affidavitImageList = [];
+
+          this.nicTranslateModel = false;
+          this.bcTranslateModel = false;
+          this.deathTranslateService = false;
+          this.marriageTranslateModel = false;
+          this.otherDocumentTranslateService = false;
+          this.schoolLeaveTranslateService = false;
+          this.affidavitTranslateionService = true;
+
+          this.affidavitForm.controls['fullName'].setValue(dataList.data[0].fullName);
+          this.affidavitForm.controls['address'].setValue(dataList.data[0].address);
+          this.affidavitForm.controls['descriptionOfService'].setValue(dataList.data[0].descriptionOfService);
+
+          if ("page1" in dataList.data[0]) {
+            this.affidavitImageList.push(dataList.data[0].page1);
+          }
+
+          if ("page2" in dataList.data[0]) {
+            this.affidavitImageList.push(dataList.data[0].page2);
+          }
+
+          if ("page3" in dataList.data[0]) {
+            this.affidavitImageList.push(dataList.data[0].page3);
+          }
+
+          if ("page4" in dataList.data[0]) {
+            this.affidavitImageList.push(dataList.data[0].page4);
+          }
+
+          if ("page5" in dataList.data[0]) {
+            this.affidavitImageList.push(dataList.data[0].page5);
+          }
+
+        } else if (serviceId == "13" || serviceId == "15") {
+
+          this.deedImageList = [];
+
+          this.nicTranslateModel = false;
+          this.bcTranslateModel = false;
+          this.deathTranslateService = false;
+          this.marriageTranslateModel = false;
+          this.otherDocumentTranslateService = false;
+          this.schoolLeaveTranslateService = false;
+          this.affidavitTranslateionService = false;
+          this.deedTranslationService = true;
+
+          this.deedForm.controls['fullName'].setValue(dataList.data[0].fullName);
+          this.deedForm.controls['address'].setValue(dataList.data[0].address);
+          
+          if ("page1" in dataList.data[0]) {
+            this.deedImageList.push(dataList.data[0].page1);
+          }
+
+          if ("page2" in dataList.data[0]) {
+            this.deedImageList.push(dataList.data[0].page2);
+          }
+
+          if ("page3" in dataList.data[0]) {
+            this.deedImageList.push(dataList.data[0].page3);
+          }
+
+          if ("page4" in dataList.data[0]) {
+            this.deedImageList.push(dataList.data[0].page4);
+          }
+
+          if ("page5" in dataList.data[0]) {
+            this.deedImageList.push(dataList.data[0].page5);
+          }
+
+          if ("page6" in dataList.data[0]) {
+            this.deedImageList.push(dataList.data[0].page6);
+          }
         }
 
+        this.spinner.hide();
       }
     })
   }
@@ -262,6 +501,7 @@ export class TranslateOrderProcessComponent implements OnInit {
     this.requestMode.invoiceNo = this.invoiceNo;
     this.requestMode.type = "TR";
 
+    this.spinner.show();
     this.orderService.getOrderInfoByInvoice(this.requestMode).subscribe((resp: any) => {
 
       const dataList = JSON.parse(JSON.stringify(resp));
@@ -277,6 +517,8 @@ export class TranslateOrderProcessComponent implements OnInit {
           this.taskList.push(eachRow);
         })
       }
+
+      this.spinner.hide();
     })
   }
 

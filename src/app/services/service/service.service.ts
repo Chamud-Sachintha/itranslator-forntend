@@ -20,4 +20,14 @@ export class ServiceService {
     const path = environment.appURL + "get-tr-service-list";
     return this.http.post(path, requestModel);
   }
+
+  getServiceInfoById(requestModel: Request) {
+    const path = environment.appURL + "get-service-info-by-id";
+    return this.http.post(path, requestModel);
+  }
+
+  updateServiceInfoById(serviceModel: Service) {
+    const path = environment.appURL + "update-service-by-id";
+    return this.http.post(path, serviceModel);
+  }
 }

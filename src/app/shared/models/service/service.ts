@@ -8,4 +8,5 @@ export class Service {
     description!: string;
     token!: any;
     flag!: any;
+    createdDate!: string;
 }

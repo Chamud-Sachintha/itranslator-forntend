@@ -89,9 +89,9 @@
                                     <td>{{ eachService.firstPrice }}</td>
                                     <td>{{ eachService.secondPrice }}</td>
                                     <td>{{ eachService.thirdPrice }}</td>
-                                    <td>ooo-ooo-ooo</td>
+                                    <td>{{ eachService.createdDate | date }}</td>
                                     <td>
-                                        <button class="btn btn-primary btn-sm">Update</button>
+                                        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" (click)="onClikcOpenServiceModal(eachService.serviceId)">Update</button>
                                     </td>
                                 </tr>
                                </tbody>
@@ -113,4 +113,52 @@
             </div>
         </div>
     </div>
+</div>
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </a>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="updateServiceForm" (ngSubmit)="onSubmitUpdateServiceForm()">
+            <div class="row">
+                <div class="col-12">
+                    <label for="">Name</label>
+                    <input type="text" class="form-control" formControlName="serviceName">
+                </div>
+                <div class="col-12">
+                    <label for="">Price 1</label>
+                    <input type="text" class="form-control" formControlName="firstPrice">
+                </div>
+                <div class="col-12">
+                    <label for="">Price 2</label>
+                    <input type="text" class="form-control" formControlName="secondPrice">
+                </div>
+                <div class="col-12">
+                    <label for="">Price 3</label>
+                    <input type="text" class="form-control" formControlName="thirdPrice">
+                </div>
+                <div class="col-12">
+                    <label for="">Description</label>
+                    <textarea name="" class="form-control" id="" cols="30" rows="10" formControlName="description"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary btn-sm" type="submit">Save</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

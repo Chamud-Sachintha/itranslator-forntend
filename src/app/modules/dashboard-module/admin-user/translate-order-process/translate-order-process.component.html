@@ -107,10 +107,10 @@
                                         <td>
                                             <div class="row">
                                                 <div class="col-4">
-                                                    <button class="btn btn-primary btn-sm">Check Documents</button>
+                                                    <button class="btn btn-primary btn-sm" (click)="onClickViewDocument(eachRow.document)">Check Documents</button>
                                                 </div>
                                                 <div class="col-6">
-                                                    <button class="btn btn-danger btn-sm" style="float: left;">Delete</button>
+                                                    <button class="btn btn-danger btn-sm" style="float: left;" (click)="onClickRemoveDocument(eachRow.document)">Delete</button>
                                                 </div>
                                             </div>
                                         </td>

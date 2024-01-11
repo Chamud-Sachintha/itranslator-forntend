@@ -93,6 +93,24 @@ export class TranslateOrderProcessComponent implements OnInit {
     this.initDeedForm();
   }
 
+  onClickViewDocument(documentName: string) {
+    const filePath = environment.devServer + documentName;
+    window.open(filePath);
+  }
+
+  onClickRemoveDocument(documentName: string) {
+    this.requestMode.token = sessionStorage.getItem("authToken");
+    this.requestMode.flag = sessionStorage.getItem("role");
+    this.requestMode.document = documentName;
+
+    this.orderService.removeDocument(this.requestMode).subscribe((resp: any) => {
+
+      if (resp.code === 1) {
+        
+      }
+    })
+  }
+
   initDeedForm() {
     this.deedForm = this.formBuilder.group({
       fullName: ['', Validators.required],

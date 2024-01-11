@@ -35,6 +35,11 @@ export class OrderService {
     return this.http.post(path, requestModel);
   }
 
+  removeDocument(requestParamModel: Request) {
+    const path = environment.appURL + "delete-doc";
+    return this.http.post(path, requestParamModel);
+  }
+
   getAllPendingOrdersList(requestModel: Request) {
     const path = environment.appURL + "get-pending-order-requests";
     return this.http.post(path, requestModel);

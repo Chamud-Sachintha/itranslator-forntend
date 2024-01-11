@@ -5,4 +5,5 @@ export class Request {
     type!: string;
     message!: string;
     serviceId!: string;
+    document!: string;
 }

@@ -7,4 +7,5 @@ export class Request {
     serviceId!: string;
     document!: string;
     paymentStatus!: string;
+    orderStatus!: string;
 }

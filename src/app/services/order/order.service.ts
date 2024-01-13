@@ -54,4 +54,9 @@ export class OrderService {
     const path = environment.appURL + "update-payment-status";
     return this.http.post(path, requestModel);
   }
+
+  updateOrderStatus(requestParamModel: Request) {
+    const path = environment.appURL + "update-order-status";
+    return this.http.post(path, requestParamModel);
+  }
 }

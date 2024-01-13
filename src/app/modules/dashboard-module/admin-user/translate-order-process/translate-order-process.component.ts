@@ -93,6 +93,25 @@ export class TranslateOrderProcessComponent implements OnInit {
     this.initDeedForm();
   }
 
+  onClickUpdateOrderStatus(orderStatus: string) {
+    this.requestMode.token = sessionStorage.getItem("authToken");
+    this.requestMode.flag = sessionStorage.getItem("role");
+    this.requestMode.orderStatus = orderStatus;
+    this.requestMode.invoiceNo = this.invoiceNo;
+
+    this.spinner.show();
+    this.orderService.updateOrderStatus(this.requestMode).subscribe((resp: any) => {
+
+      if (resp.code === 1) {
+        this.tost.success("Update Order Status", "Order Status is Updated Successfully.");
+      } else {
+        this.tost.error("Update Order Status", resp.message);
+      }
+
+      this.spinner.hide();
+    })
+  }
+
   onClickViewDocument(documentName: string) {
     const filePath = environment.devServer + documentName;
     window.open(filePath);

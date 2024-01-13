@@ -44,7 +44,7 @@
                                         <td>{{ eachOrder.totalAmount }} .00</td>
                                         <td>{{ eachOrder.createTime | date }}</td>
                                         <td>
-                                            <button class="btn btn-primary btn-sm">Check Order</button>
+                                            <button class="btn btn-primary btn-sm" (click)="onClickCheckOrder(eachOrder.invoiceNo)">Check Order</button>
                                         </td>
                                     </tr>
                                 </tbody>

@@ -44,4 +44,14 @@ export class OrderService {
     const path = environment.appURL + "get-pending-order-requests";
     return this.http.post(path, requestModel);
   }
+
+  getOrderInfo(requestParamModel: Request) {
+    const path = environment.appURL + "get-order-info";
+    return this.http.post(path, requestParamModel);
+  }
+
+  updatePaymentStatus(requestModel: Request) {
+    const path = environment.appURL + "update-payment-status";
+    return this.http.post(path, requestModel);
+  }
 }

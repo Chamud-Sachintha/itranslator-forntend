@@ -5,4 +5,5 @@ export class OrderRequest {
     paymentMethod!: string;
     totalAmount!: string;
     createTime!: string;
+    bankSlip!: string;
 }

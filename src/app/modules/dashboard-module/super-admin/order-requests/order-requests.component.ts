@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { OrderService } from 'src/app/services/order/order.service';
 import { OrderRequest } from 'src/app/shared/models/OrderRequest/order-request';
 import { Request } from 'src/app/shared/models/Request/request';
@@ -13,10 +14,14 @@ export class OrderRequestsComponent implements OnInit {
   requestModel = new Request();
   orderRequestList: OrderRequest[] = [];
 
-  constructor(private orderService: OrderService) {}
+  constructor(private orderService: OrderService, private router: Router) {}
 
   ngOnInit(): void {
     this.getAllPendingOrderList();
+  }
+
+  onClickCheckOrder(invoiceNo: string) {
+    this.router.navigate(['/app/check-order', invoiceNo]);
   }
 
   getAllPendingOrderList() {

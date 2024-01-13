@@ -6,4 +6,5 @@ export class Request {
     message!: string;
     serviceId!: string;
     document!: string;
+    paymentStatus!: string;
 }

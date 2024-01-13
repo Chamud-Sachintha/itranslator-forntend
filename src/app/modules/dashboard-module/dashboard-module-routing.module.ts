@@ -18,6 +18,7 @@ import { TranslateOrderProcessComponent } from './admin-user/translate-order-pro
 import { NotaryTaskComponent } from './admin-user/notary-task/notary-task.component';
 import { NotaryOrderProcessComponent } from './admin-user/notary-order-process/notary-order-process.component';
 import { OrderRequestsComponent } from './super-admin/order-requests/order-requests.component';
+import { CheckOrderComponent } from './super-admin/check-order/check-order.component';
 
 const routes: Routes = [
   {
@@ -110,6 +111,10 @@ const routes: Routes = [
       {
         path: 'order-requests',
         component: OrderRequestsComponent
+      },
+      {
+        path: 'check-order/:invoiceNo',
+        component: CheckOrderComponent
       }
     ]
   }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './user/home/home.component';
+import { HomeComponent } from './super-admin/home/home.component';
 import { SelectServicesComponent } from './user/select-services/select-services.component';
 import { SelectRequiredDocsComponent } from './user/select-required-docs/select-required-docs.component';
 import { UploadRequiredDocsComponent } from './user/upload-required-docs/upload-required-docs.component';

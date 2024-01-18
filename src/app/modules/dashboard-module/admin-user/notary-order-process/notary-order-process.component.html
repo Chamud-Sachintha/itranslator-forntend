@@ -4,13 +4,14 @@
         <div class="page-header">
             <div class="row">
                 <div class="col-6">
-                    <h2 class="pageheader-title">Process Translate Service Order. </h2>
+                    <h2 class="pageheader-title">Check Translate Service Order. </h2>
                 </div>
                 <div class="col-6">
                     <h2 class="pageheader-title" style="float: right;">Invoice No - {{ this.invoiceNo }}</h2>
                 </div>
             </div>
-            <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
+            <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis
+                faucibus at enim quis massa lobortis rutrum.</p>
             <div class="page-breadcrumb">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
@@ -23,148 +24,180 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-12">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
-            <h5 class="card-header">Process Notary Service Order</h5>
-            <div class="card-body">
-                <form [formGroup]="this.paymentForm">
-                    <div class="row">
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <label for="">පත් ඉරු පීමේෂාව / Extract Search</label>
-                            <input type="text" class="form-control" formControlName="extSearch">
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <label for="">සෙවන පිටපත් පීමේෂාව / Second copy check</label>
-                            <input type="text" class="form-control" formControlName="secondCopyCheck">
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <label for="">පත් ඉරු ගැනීම / Obtain Extracts</label>
-                            <input type="text" class="form-control" formControlName="obtainExt">
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <label for="">සෙවන පිටපත් ගැනීම / Obtain Second copy taking</label>
-                            <input type="text" class="form-control" formControlName="obtainSecondCpyTaking">
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <label for="">සපලපත් ටහන ැකසීම / Preparation of the Title</label>
-                            <input type="text" class="form-control" formControlName="prepOfTitle">
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <label for="">ඡායාරූප ගා ්තු / Photography fees</label>
-                            <input type="text" class="form-control" formControlName="photographyFees">
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <label for="">ඡායා පිටපත් ගා ්තු / Photocopy charges</label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <label for="">රජසේ මුද්ෙර ගා ්තු / Government Stamp Duty</label>
-                            <input type="text" class="form-control" formControlName="govStampDuty">
+            <div class="row">
+                <div class="col-6">
+                    <h5 class="card-header">List of All Documents to Be Translate</h5>
+                </div>
+                <div class="col-6">
+                    <!-- <h5 class="card-header" style="float: right;">Order Status : {{ this. }}</h5> -->
+                </div>
+            </div>
+            <div class="card-body border-top">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered first">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Document Type</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let eachType of this.allDocumentTypes; index as i">
+                                        <td>{{ i + 1 }}</td>
+                                        <td>{{ eachType }}</td>
+                                        <td>
+                                            <button class="btn btn-primary btn-sm" data-toggle="modal"
+                                                data-target="#exampleModal"
+                                                (click)="onClickOpenDocTypeModel(i + 1)">Check</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Document Type</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
                         </div>
                     </div>
-                    <div class="row mt-3">
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <label for="">ලියා පදිංචි ණීීමසම් ගා ්තු / Registration fees</label>
-                            <input type="text" class="form-control" formControlName="regFees">
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <label for="">ප්‍රවාහන ගා ්තු / Transportation charges</label>
-                            <input type="text" class="form-control" formControlName="transpotationFees">
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <label for="">සනොතාරි ් ගා ්තු / Notary fees</label>
-                            <input type="text" class="form-control" formControlName="notaryFees">
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <label for="">කයානම් ස ේවා ගා ්තු / Expedited service charges</label>
-                            <input type="text" class="form-control" formControlName="expServiceCharge">
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <label for="">හ දන්වාදීසම් සකොමි ් / Referral commission</label>
-                            <input type="text" class="form-control" formControlName="refCommision">
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <label for="">තැපැේ ගා ්තු / Postage charges</label>
-                            <input type="text" class="form-control" formControlName="postageCharge">
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <label for="">ස ේවාව ැපයීම ෙහා ම්පූර්ණ අය ණීීමම Full charge for service provision</label>
-                            <input type="text" class="form-control" formControlName="fullChargeOfServiceProvision">
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <label for="">පලමු අත්තිකාරම / First advance</label>
-                            <input type="text" class="form-control" formControlName="firstAdvance">
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <label for="">සෙවන අත්තිකාරම / Second advance</label>
-                            <input type="text" class="form-control" formControlName="secondAdvance">
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <label for="">තුන්වන අත්තිකාරම / Third advance</label>
-                            <input type="text" class="form-control" formControlName="thirdAdvance">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <h5 class="card-header">Payment Informations</h5>
+                </div>
+                <div class="col-6">
+                    <button class="btn btn-primary btn-sm" style="float: right; margin-right: 16px;" (click)="onClickSetPaymentInfo()">Set Payment
+                        Info</button>
+                </div>
+            </div>
+            <div class="card-body border-top">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered first">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Payment Info Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr></tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Payment Info Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="row mt-3">
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <label for="">හතරවන අත්තිකාරම / Fourth advance</label>
-                            <input type="text" class="form-control" formControlName="forthAdvance">
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <label for="">ප ්වන අත්තිකාරම / Fifth advance</label>
-                            <input type="text" class="form-control" formControlName="fifthAdvance">
-                        </div>
+                </div>
+            </div>
+
+            <h5 class="card-header">Translaed Documents</h5>
+            <div class="card-body border-top">
+                <div class="row">
+                    <div class="col-12">
+                        <label for="">Upload Translted Documents</label>
+                        <input type="file" class="form-control">
+
+                        <button class="btn btn-primary btn-sm mt-3">Upload Documents</button>
                     </div>
-                    <div class="row mt-3">
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <label for="">අව න් සගවීම / Final payment</label>
-                            <input type="text" class="form-control" formControlName="finalPayment">
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <label for="">හිග මුෙල / Amount in arrears</label>
-                            <input type="text" class="form-control" formControlName="finalPayment">
-                        </div>
+                </div>
+            </div>
+
+            <h5 class="card-header">Admin Messages</h5>
+            <div class="card-body border-top">
+                <div class="row">
+                    <div class="col-12">
+                        <textarea name="" id="" cols="30" rows="10" class="form-control" #message></textarea>
+                        <button class="btn btn-primary btn-sm mt-3">Send Message</button>
                     </div>
-                    <div class="row mt-3">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12" style="max-height: 500px; overflow-y: scroll;">
+                    <div class="card-body">
+                        <h4 class="card-title">Recent Comments</h4>
+                        <h6 class="card-subtitle">Latest Comments section by users</h6>
+                    </div>
+
+                    <!-- <div class="comment-widgets m-b-20" *ngFor="let eachMessage of this.adminLessageList">
+    
+                        <div class="d-flex flex-row comment-row">
+                            <div class="p-2"><span class="round"><img src="{{ eachMessage.avatar }}"
+                                        alt="user" width="50"></span></div>
+                            <div class="comment-text w-100">
+                                <h5>{{ this.eachMessage.fromUser }}</h5>
+                                <div class="comment-footer">
+                                    <span class="date">{{ eachMessage.time | date }}</span>
+                                    <span class="label label-info">Pending</span> <span class="action-icons">
+                                        <a href="#" data-abc="true"><i class="fa fa-pencil"></i></a>
+                                        <a href="#" data-abc="true"><i class="fa fa-rotate-right"></i></a>
+                                        <a href="#" data-abc="true"><i class="fa fa-heart"></i></a>
+                                    </span>
+                                </div>
+                                <p class="m-b-5 m-t-10">{{ eachMessage.message }}
+                                    </p>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+
+            <h5 class="card-header">Order Checking Informations</h5>
+            <div class="card-body border-top">
+                <div class="row">
+                    <div class="col-12">
+                        <label for="">Order Status</label>
+                        <select name="" id="" class="form-control" #orderStatus>
+                            <option value="">-- Select Option --</option>
+                            <option value="1">Complete</option>
+                        </select>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <button class="btn btn-primary btn-sm">Update Order</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </a>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="row mb-3" *ngFor="let eachImage of this.showDocuments[0]; index as i">
                         <div class="col-12">
-                            <label for="">සි දකල යුතු වැඩ කාර්යය වි ්තරය / Description of work to be done</label>
-                            <textarea name="" class="form-control" id="" cols="30" rows="10" formControlName="descriptionOfService"></textarea>
+                            <button class="btn btn-primary btn-sm" style="width: 100%;"
+                                (click)="onClickViewImage(eachImage)">View Image {{ i + 1 }}</button>
                         </div>
                     </div>
-                    <div class="row mt-3">
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <label for="">රැසගන යන දිනය / Pick up date</label>
-                            <input type="date" class="form-control" formControlName="pickUpDate">
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <label for="">ඉදිරිපත් කරන දිනය / Date of submission</label>
-                            <input type="date" class="form-control" formControlName="dateOfSubmission">
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <label for="">තැපැේ කරන දිනය / Date of mailing</label>
-                            <input type="date" class="form-control" formControlName="dateOfMailing">
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-sm-12">
-                            <label for="">ලියාපදිංචි කරන දිනය / Date of registration</label>
-                            <input type="date" class="form-control" formControlName="dateOfRegistration">
-                        </div>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>

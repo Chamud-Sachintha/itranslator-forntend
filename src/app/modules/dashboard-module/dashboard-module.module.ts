@@ -23,6 +23,7 @@ import { TranslateOrderProcessComponent } from './admin-user/translate-order-pro
 import { NotaryOrderProcessComponent } from './admin-user/notary-order-process/notary-order-process.component';
 import { OrderRequestsComponent } from './super-admin/order-requests/order-requests.component';
 import { CheckOrderComponent } from './super-admin/check-order/check-order.component';
+import { SetPaymentInfoComponent } from './admin-user/set-payment-info/set-payment-info.component';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { CheckOrderComponent } from './super-admin/check-order/check-order.compo
     NotaryOrderProcessComponent,
     OrderRequestsComponent,
     CheckOrderComponent,
+    SetPaymentInfoComponent,
   ],
   imports: [
     CommonModule,

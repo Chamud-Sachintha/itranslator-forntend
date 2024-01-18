@@ -19,6 +19,7 @@ import { NotaryTaskComponent } from './admin-user/notary-task/notary-task.compon
 import { NotaryOrderProcessComponent } from './admin-user/notary-order-process/notary-order-process.component';
 import { OrderRequestsComponent } from './super-admin/order-requests/order-requests.component';
 import { CheckOrderComponent } from './super-admin/check-order/check-order.component';
+import { SetPaymentInfoComponent } from './admin-user/set-payment-info/set-payment-info.component';
 
 const routes: Routes = [
   {
@@ -87,6 +88,10 @@ const routes: Routes = [
       {
         path: 'ns-order/:invoiceId',
         component: NotaryOrderProcessComponent
+      },
+      {
+        path: 'ns-order/set-pay-info/:invoiceNo',
+        component: SetPaymentInfoComponent
       },
 
       // super admin menu paths

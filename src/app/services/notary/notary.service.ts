@@ -29,8 +29,8 @@ export class NotaryService {
     return this.http.post(path, subNotaryCategory);
   }
 
-  getNotaryOrderPayStatus(requestParamModel: Request) {
-    const path = environment.appURL + "get-ns-order-payment-status";
+  getNotaryOrderPayInfo(requestParamModel: Request) {
+    const path = environment.appURL + "get-ns-order-payment-info";
     return this.http.post(path, requestParamModel);
   }
 
@@ -43,4 +43,24 @@ export class NotaryService {
     const path = environment.appURL + "add-payment-log";
     return this.http.post(path, paymentLog);
   } 
+
+  submitNotasyDocuments(formData: FormData) {
+    const path = environment.appURL + "submit-notary-documents";
+    return this.http.post(path, formData);
+  }
+
+  getNotaryDocumentList(requestParamModel: Request) {
+    const path = environment.appURL + "get-notary-documents";
+    return this.http.post(path, requestParamModel);
+  }
+
+  updateNotaryOrderStatus(requestParamModel: Request) {
+    const path = environment.appURL + "update-ns-order-by-admin";
+    return this.http.post(path, requestParamModel);
+  }
+
+  getNotaryOrdersPendingList(requestParamModel: Request) {
+    const path = environment.appURL + "get-ns-order-request-list";
+    return this.http.post(path, requestParamModel);
+  }
 }

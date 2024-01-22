@@ -13,6 +13,7 @@ import { NotaryServiceComponent } from './super-admin/notary-service/notary-serv
 import { TranslateOrderRequestsComponent } from './admin-user/translate-order-requests/translate-order-requests.component';
 import { SuperAdminGuard } from 'src/app/guards/super-admin/super-admin.guard';
 import { NotaryOrderRequestsComponent } from './admin-user/notary-order-requests/notary-order-requests.component';
+import { NotaryOrderRequestsComponent as NSORSA } from './super-admin/notary-order-requests/notary-order-requests.component';
 import { TranslateTaskComponent } from './admin-user/translate-task/translate-task.component';
 import { TranslateOrderProcessComponent } from './admin-user/translate-order-process/translate-order-process.component';
 import { NotaryTaskComponent } from './admin-user/notary-task/notary-task.component';
@@ -116,6 +117,10 @@ const routes: Routes = [
       {
         path: 'order-requests',
         component: OrderRequestsComponent
+      },
+      {
+        path: 'notary-order-requests',
+        component: NSORSA
       },
       {
         path: 'check-order/:invoiceNo',

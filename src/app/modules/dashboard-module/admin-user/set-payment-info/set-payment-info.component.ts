@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NotaryService } from 'src/app/services/notary/notary.service';
 import { NotaryPaymentLog } from 'src/app/shared/models/NotaryPaymentLog/notary-payment-log';
 
@@ -15,12 +15,58 @@ export class SetPaymentInfoComponent implements OnInit {
   paymentForm!: FormGroup;
   invoiceNo!: string;
 
-  constructor(private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder, private notaryService: NotaryService) {}
+  constructor(private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder, private notaryService: NotaryService
+              , private router: Router) {}
 
   ngOnInit(): void {
     this.invoiceNo = this.activatedRoute.snapshot.params['invoiceNo'];
 
     this.initPaymentForm();
+  }
+
+  onClickBackBtn() {
+    this.router.navigate(['/app/ns-order', this.invoiceNo]);
+  }
+
+  validateNaN(input: any) {
+    if (isNaN(input)) {
+      return 0;
+    } else {
+      return input;
+    }
+  }
+
+  onClickSetTotalAmount() {
+    const extSearch=  this.validateNaN(parseFloat(this.paymentForm.controls['extSearch'].value));
+    const secondCopyCheck= this.validateNaN(parseFloat(this.paymentForm.controls['secondCopyCheck'].value));
+    const obtainExt= this.validateNaN(parseFloat(this.paymentForm.controls['obtainExt'].value));
+    const obtainSecondCpyTaking= this.validateNaN(parseFloat(this.paymentForm.controls['obtainSecondCpyTaking'].value));
+    const prepOfTitle= this.validateNaN(parseFloat(this.paymentForm.controls['prepOfTitle'].value));
+    const photographyFees= this.validateNaN(parseFloat(this.paymentForm.controls['photographyFees'].value));
+    const govStampDuty= this.validateNaN(parseFloat(this.paymentForm.controls['govStampDuty'].value));
+    const regFees= this.validateNaN(parseFloat(this.paymentForm.controls['regFees'].value));
+    const transpotationFees= this.validateNaN(parseFloat(this.paymentForm.controls['transpotationFees'].value));
+    const notaryFees= this.validateNaN(parseFloat(this.paymentForm.controls['notaryFees'].value));
+    const expServiceCharge= this.validateNaN(parseFloat(this.paymentForm.controls['expServiceCharge'].value));
+    const refCommision= this.validateNaN(parseFloat(this.paymentForm.controls['refCommision'].value));
+    const postageCharge= this.validateNaN(parseFloat(this.paymentForm.controls['postageCharge'].value));
+    const fullChargeOfServiceProvision= this.validateNaN(parseFloat(this.paymentForm.controls['fullChargeOfServiceProvision'].value));
+    const firstAdvance= this.validateNaN(parseFloat(this.paymentForm.controls['firstAdvance'].value));
+    const secondAdvance= this.validateNaN(parseFloat(this.paymentForm.controls['secondAdvance'].value));
+    const thirdAdvance= this.validateNaN(parseFloat(this.paymentForm.controls['thirdAdvance'].value));
+    const forthAdvance= this.validateNaN(parseFloat(this.paymentForm.controls['forthAdvance'].value));
+    const fifthAdvance= this.validateNaN(parseFloat(this.paymentForm.controls['fifthAdvance'].value));
+    const finalPayment= this.validateNaN(parseFloat(this.paymentForm.controls['finalPayment'].value));
+    const amountInArreas= this.validateNaN(parseFloat(this.paymentForm.controls['amountInArreas'].value));
+    const stampDuty = this.validateNaN(parseFloat(this.paymentForm.controls['stampDuty'].value));
+
+    const totalAmount = extSearch + secondCopyCheck + obtainExt + obtainSecondCpyTaking + prepOfTitle + photographyFees + govStampDuty 
+                          + regFees + transpotationFees + notaryFees + expServiceCharge + refCommision + postageCharge
+                          + fullChargeOfServiceProvision + firstAdvance + secondAdvance + thirdAdvance + forthAdvance + fifthAdvance
+                          + finalPayment + amountInArreas + stampDuty;
+
+                          console.log(prepOfTitle);
+    this.paymentForm.controls['totalAmount'].setValue(totalAmount);
   }
 
   onSubmitPaymentLogForm() {
@@ -51,6 +97,7 @@ export class SetPaymentInfoComponent implements OnInit {
     const dateOfMailing= this.paymentForm.controls['dateOfMailing'].value;
     const dateOfRegistration= this.paymentForm.controls['dateOfRegistration'].value;
     const stampDuty = this.paymentForm.controls['stampDuty'].value;
+    const totalAmount = this.paymentForm.controls['totalAmount'].value;
 
     this.notaryPaymentLogModel.token = sessionStorage.getItem("authToken");
     this.notaryPaymentLogModel.flag = sessionStorage.getItem("role");
@@ -82,6 +129,7 @@ export class SetPaymentInfoComponent implements OnInit {
     this.notaryPaymentLogModel.dateOfMailing = dateOfMailing;
     this.notaryPaymentLogModel.dateOfRegistration = dateOfRegistration;
     this.notaryPaymentLogModel.stampDuty = stampDuty;
+    this.notaryPaymentLogModel.totalAmount = totalAmount;
 
     this.notaryService.addPaymentLog(this.notaryPaymentLogModel).subscribe((resp: any) => {
 
@@ -119,8 +167,11 @@ export class SetPaymentInfoComponent implements OnInit {
       dateOfSubmission: ['', Validators.required],
       dateOfMailing: ['', Validators.required],
       dateOfRegistration: ['', Validators.required],
-      stampDuty: ['', Validators.required]
+      stampDuty: ['', Validators.required],
+      totalAmount: ['', Validators.required]
     })
+
+    this.paymentForm.controls['totalAmount'].disable();
   }
 
 }

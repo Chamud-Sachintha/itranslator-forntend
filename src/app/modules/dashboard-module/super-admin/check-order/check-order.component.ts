@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { NotaryService } from 'src/app/services/notary/notary.service';
 import { OrderService } from 'src/app/services/order/order.service';
 import { BCTranslateModel } from 'src/app/shared/models/BCTranslateModel/bctranslate-model';
 import { DCTranslateModel } from 'src/app/shared/models/DCTranslateModel/dctranslate-model';
@@ -53,8 +54,20 @@ export class CheckOrderComponent implements OnInit {
   orderInfoModel = new OrderRequest();
   isHaveBankSlip = false;
 
+  allDocumentTypes: string[] = [
+    'NIC / Passport / Driving License / Adult Identity Card',
+    'Extracts',
+    'Deeds / Certificates of Title'
+  ]
+  showDocuments: any[] = [];
+  firstDocList: any[] = [];
+  secondDocList: any[] = [];
+  thirdDocList: any[] = [];
+  bankSlipNotice!: boolean;
+  paymentStatus!: number;
+
   constructor(private activatedRoute: ActivatedRoute, private orderService: OrderService, private spinner: NgxSpinnerService
-            , private formBuilder: FormBuilder, private tostr: ToastrService) {}
+            , private formBuilder: FormBuilder, private tostr: ToastrService, private notaryService: NotaryService) {}
 
   ngOnInit(): void {
     this.invoiceNo = this.activatedRoute.snapshot.params['invoiceNo'];
@@ -64,16 +77,59 @@ export class CheckOrderComponent implements OnInit {
       this.isTranslateOrder = true;
     }
 
-    this.loadOrderRequestDetails();
-    this.initNicTranslateModelForm();
-    this.initBcTranslateModelForm();
-    this.marriageTranslateFormInit();
-    this.initDCTranslateForm();
-    this.initOtherDocumenTranslateForm();
-    this.initSchoolLeavingCertificateForm();
-    this.initAffidavitForm();
-    this.initDeedForm();
-    this.getOrder();
+    if (this.isTranslateOrder) {
+      this.loadOrderRequestDetails();
+      this.initNicTranslateModelForm();
+      this.initBcTranslateModelForm();
+      this.marriageTranslateFormInit();
+      this.initDCTranslateForm();
+      this.initOtherDocumenTranslateForm();
+      this.initSchoolLeavingCertificateForm();
+      this.initAffidavitForm();
+      this.initDeedForm();
+      this.getOrder();
+    } else {
+      this.loadNotaryOrderInfo()
+    }
+  }
+
+  onClickViewImage(imageName: string) {
+    const filePath = environment.fileServerURL + imageName;
+    window.open(filePath)
+  }
+
+  onClickOpenDocTypeModel(index: number) {
+    this.showDocuments = [];
+
+    if (index == 1) {
+      this.showDocuments.push(this.firstDocList[0]);
+    } else if (index == 2) {
+      this.showDocuments = this.secondDocList;
+    } else {
+      this.showDocuments = this.thirdDocList;
+    }
+
+    console.log(this.showDocuments)
+  }
+
+  loadNotaryOrderInfo() {
+    this.requestMode.token = sessionStorage.getItem("authToken");
+    this.requestMode.flag = sessionStorage.getItem("role");
+    this.requestMode.invoiceNo = this.invoiceNo;
+
+    this.notaryService.getNotaryOrderInfoByInvoice(this.requestMode).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        this.firstDocList.push(dataList.data[0].firstDocType)
+        this.secondDocList.push(dataList.data[0].secondDocType)
+        this.thirdDocList.push(dataList.data[0].thirdDocType)
+
+        this.bankSlipNotice = dataList.data[0].showNotice;
+        this.paymentStatus = dataList.data[0].paymentStatus;
+      }
+    })
   }
 
   onClickUpdatePaymentStatus(paymentStatus: string) {

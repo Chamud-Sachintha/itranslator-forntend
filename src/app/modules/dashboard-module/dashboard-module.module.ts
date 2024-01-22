@@ -48,7 +48,7 @@ import { NotaryOrderRequestsComponent as NSORSA } from './super-admin/notary-ord
     OrderRequestsComponent,
     CheckOrderComponent,
     SetPaymentInfoComponent,
-    NSORSA
+    NSORSA,
   ],
   imports: [
     CommonModule,

@@ -125,7 +125,7 @@ const routes: Routes = [
       {
         path: 'check-order/:invoiceNo',
         component: CheckOrderComponent
-      }
+      },
     ]
   }
 ];

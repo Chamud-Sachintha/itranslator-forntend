@@ -219,12 +219,20 @@
 
             <h5 class="card-header">Order Checking Informations</h5>
             <div class="card-body border-top">
+                <div class="row" *ngIf="this.isCustomerComplete">
+                    <div class="col-12">
+                        <div class="alert alert-primary" role="alert">
+                            Customer is Completed the Order
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-12">
                         <label for="">Order Status</label>
                         <select name="" id="" class="form-control" #orderStatus>
                             <option value="">-- Select Option --</option>
-                            <option value="1">Complete</option>
+                            <option value="2">Processing</option>
+                            <option value="3">Complete</option>
                         </select>
                     </div>
                     <div class="col-12 mt-3">

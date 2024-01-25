@@ -25,6 +25,11 @@ export class OrderService {
     return this.http.post(path, requestParamModel);
   }
 
+  getCSOrderList(requestModel: Request) {
+    const path = environment.appURL + "get-cs-orders";
+    return this.http.post(path, requestModel);
+  }
+
   getOrderInfoByInvoice(requestModel: Request) {
     const path = environment.appURL + "get-order-info-by-invoice";
     return this.http.post(path, requestModel);

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotaryService } from 'src/app/services/notary/notary.service';
 import { NotaryPaymentLog } from 'src/app/shared/models/NotaryPaymentLog/notary-payment-log';
+import { Request } from 'src/app/shared/models/Request/request';
 
 @Component({
   selector: 'app-set-payment-info',
@@ -11,6 +12,7 @@ import { NotaryPaymentLog } from 'src/app/shared/models/NotaryPaymentLog/notary-
 })
 export class SetPaymentInfoComponent implements OnInit {
 
+  requestParamMdel = new Request();
   notaryPaymentLogModel = new NotaryPaymentLog();
   paymentForm!: FormGroup;
   invoiceNo!: string;
@@ -22,6 +24,56 @@ export class SetPaymentInfoComponent implements OnInit {
     this.invoiceNo = this.activatedRoute.snapshot.params['invoiceNo'];
 
     this.initPaymentForm();
+    this.getPaymentInfo();
+  }
+
+  getPaymentInfo() {
+
+    this.paymentForm.controls['amountInArreas'].disable();
+
+    this.requestParamMdel.token = sessionStorage.getItem("authToken");
+    this.requestParamMdel.flag = sessionStorage.getItem("role");
+    this.requestParamMdel.invoiceNo = this.invoiceNo;
+
+    this.notaryService.getNotaryOrderPayInfo(this.requestParamMdel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        const isPaymentSet = dataList.data[0].isOrderPaymentSet;
+
+        if (isPaymentSet) {
+          this.paymentForm.controls['extSearch'].setValue(dataList.data[0].extSearch);
+          this.paymentForm.controls['secondCopyCheck'].setValue(dataList.data[0].secondCopyCheck);
+          this.paymentForm.controls['obtainExt'].setValue(dataList.data[0].obtainExt);
+          this.paymentForm.controls['obtainSecondCpyTaking'].setValue(dataList.data[0].obtainSecondCpyTaking)
+          this.paymentForm.controls['prepOfTitle'].setValue(dataList.data[0].prepOfTitle);
+          this.paymentForm.controls['photographyFees'].setValue(dataList.data[0].photographyFees);
+          this.paymentForm.controls['govStampDuty'].setValue(dataList.data[0].govStampDuty);
+          this.paymentForm.controls['regFees'].setValue(dataList.data[0].regFees);
+          this.paymentForm.controls['transpotationFees'].setValue(dataList.data[0].transpotationFees)
+          this.paymentForm.controls['notaryFees'].setValue(dataList.data[0].notaryFees);
+          this.paymentForm.controls['expServiceCharge'].setValue(dataList.data[0].expServiceCharge);
+          this.paymentForm.controls['refCommision'].setValue(dataList.data[0].refCommision);
+          this.paymentForm.controls['postageCharge'].setValue(dataList.data[0].postageCharge);
+          this.paymentForm.controls['fullChargeOfServiceProvision'].setValue(dataList.data[0].fullChargeOfServiceProvision);
+          this.paymentForm.controls['firstAdvance'].setValue(dataList.data[0].firstAdvance);
+          this.paymentForm.controls['secondAdvance'].setValue(dataList.data[0].secondAdvance);
+          this.paymentForm.controls['thirdAdvance'].setValue(dataList.data[0].thirdAdvance);
+          this.paymentForm.controls['forthAdvance'].setValue(dataList.data[0].forthAdvance);
+          this.paymentForm.controls['fifthAdvance'].setValue(dataList.data[0].fifthAdvance);
+          this.paymentForm.controls['finalPayment'].setValue(dataList.data[0].finalPayment);
+          this.paymentForm.controls['amountInArreas'].setValue(dataList.data[0].amountInArreas);
+          this.paymentForm.controls['descriptionOfService'].setValue(dataList.data[0].descriptionOfService)
+          this.paymentForm.controls['pickUpDate'].setValue(dataList.data[0].pickUpDate);
+          this.paymentForm.controls['dateOfSubmission'].setValue(dataList.data[0].dateOfSubmission);
+          this.paymentForm.controls['dateOfMailing'].setValue(dataList.data[0].dateOfMailing);
+          this.paymentForm.controls['dateOfRegistration'].setValue(dataList.data[0].dateOfRegistration)
+          this.paymentForm.controls['stampDuty'].setValue(dataList.data[0].stampDuty);
+          this.paymentForm.controls['totalAmount'].setValue(dataList.data[0].totalAmount);
+        }
+      }
+    })
   }
 
   onClickBackBtn() {
@@ -62,11 +114,12 @@ export class SetPaymentInfoComponent implements OnInit {
 
     const totalAmount = extSearch + secondCopyCheck + obtainExt + obtainSecondCpyTaking + prepOfTitle + photographyFees + govStampDuty 
                           + regFees + transpotationFees + notaryFees + expServiceCharge + refCommision + postageCharge
-                          + fullChargeOfServiceProvision + firstAdvance + secondAdvance + thirdAdvance + forthAdvance + fifthAdvance
-                          + finalPayment + amountInArreas + stampDuty;
+                          + fullChargeOfServiceProvision + stampDuty;
 
-                          console.log(prepOfTitle);
+    
     this.paymentForm.controls['totalAmount'].setValue(totalAmount);
+
+    return false;
   }
 
   onSubmitPaymentLogForm() {
@@ -97,7 +150,7 @@ export class SetPaymentInfoComponent implements OnInit {
     const dateOfMailing= this.paymentForm.controls['dateOfMailing'].value;
     const dateOfRegistration= this.paymentForm.controls['dateOfRegistration'].value;
     const stampDuty = this.paymentForm.controls['stampDuty'].value;
-    const totalAmount = this.paymentForm.controls['totalAmount'].value;
+    var totalAmount = this.paymentForm.controls['totalAmount'].value;
 
     this.notaryPaymentLogModel.token = sessionStorage.getItem("authToken");
     this.notaryPaymentLogModel.flag = sessionStorage.getItem("role");
@@ -130,6 +183,10 @@ export class SetPaymentInfoComponent implements OnInit {
     this.notaryPaymentLogModel.dateOfRegistration = dateOfRegistration;
     this.notaryPaymentLogModel.stampDuty = stampDuty;
     this.notaryPaymentLogModel.totalAmount = totalAmount;
+
+    if (totalAmount == 0) {
+      totalAmount = "0.00";
+    }
 
     this.notaryService.addPaymentLog(this.notaryPaymentLogModel).subscribe((resp: any) => {
 

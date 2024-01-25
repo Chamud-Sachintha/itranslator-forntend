@@ -21,6 +21,9 @@ import { NotaryOrderProcessComponent } from './admin-user/notary-order-process/n
 import { OrderRequestsComponent } from './super-admin/order-requests/order-requests.component';
 import { CheckOrderComponent } from './super-admin/check-order/check-order.component';
 import { SetPaymentInfoComponent } from './admin-user/set-payment-info/set-payment-info.component';
+import { CsServiceRequestsComponent } from './admin-user/cs-service-requests/cs-service-requests.component';
+import { CsTaskComponent } from './admin-user/cs-task/cs-task.component';
+import { CsOrderProcessComponent } from './admin-user/cs-order-process/cs-order-process.component';
 
 const routes: Routes = [
   {
@@ -75,6 +78,10 @@ const routes: Routes = [
         component: NotaryOrderRequestsComponent
       },
       {
+        path: 'cs-orders',
+        component: CsServiceRequestsComponent
+      },
+      {
         path: 'tr-task-list',
         component: TranslateTaskComponent
       },
@@ -83,12 +90,20 @@ const routes: Routes = [
         component: NotaryTaskComponent
       },
       {
+        path: 'cs-task-list',
+        component: CsTaskComponent
+      },
+      {
         path: 'tr-order/:invoiceId',
         component: TranslateOrderProcessComponent
       },
       {
         path: 'ns-order/:invoiceId',
         component: NotaryOrderProcessComponent
+      },
+      {
+        path: 'cs-order/:invoiceNo',
+        component: CsOrderProcessComponent
       },
       {
         path: 'ns-order/set-pay-info/:invoiceNo',

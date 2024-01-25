@@ -25,6 +25,9 @@ import { OrderRequestsComponent } from './super-admin/order-requests/order-reque
 import { CheckOrderComponent } from './super-admin/check-order/check-order.component';
 import { SetPaymentInfoComponent } from './admin-user/set-payment-info/set-payment-info.component';
 import { NotaryOrderRequestsComponent as NSORSA } from './super-admin/notary-order-requests/notary-order-requests.component';
+import { CsServiceRequestsComponent } from './admin-user/cs-service-requests/cs-service-requests.component';
+import { CsTaskComponent } from './admin-user/cs-task/cs-task.component';
+import { CsOrderProcessComponent } from './admin-user/cs-order-process/cs-order-process.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +52,9 @@ import { NotaryOrderRequestsComponent as NSORSA } from './super-admin/notary-ord
     CheckOrderComponent,
     SetPaymentInfoComponent,
     NSORSA,
+    CsServiceRequestsComponent,
+    CsTaskComponent,
+    CsOrderProcessComponent,
   ],
   imports: [
     CommonModule,

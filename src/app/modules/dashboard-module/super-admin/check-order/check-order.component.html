@@ -119,8 +119,10 @@
               <div style="float: right; margin-right: 10px;">
                   <label for="">Current Status</label>
                   <span class="badge badge-info" style="margin-left: 20px;">
-                    <p *ngIf="this.paymentStatus == 0">Pending</p>
-                    <p *ngIf="this.paymentStatus == 1">Paid</p>
+                    <p *ngIf="this.orderStatus == 0">Pending</p>
+                    <p *ngIf="this.orderStatus == 1">Taken</p>
+                    <p *ngIf="this.orderStatus == 2">Processing</p>
+                    <p *ngIf="this.orderStatus == 3">Complete</p>
                   </span>
               </div>
               <!-- <h5 class="card-header" style="float: right;">Order Status : {{ this. }}</h5> -->
@@ -161,7 +163,7 @@
           </div>
         </div>
 
-        <h5 class="card-header">Bank Slip Informations</h5>
+        <!-- <h5 class="card-header">Bank Slip Informations</h5>
         <div class="card-body border-top">
           <div class="alert alert-primary" role="alert" *ngIf="this.bankSlipNotice">
             Bank Slip Informations.
@@ -182,6 +184,16 @@
             </div>
             <div class="col-12 mt-3">
               <button class="btn btn-primary btn-sm" (click)="onClickUpdatePaymentStatus(paymentStatusNs.value)">Update Payment Status</button>
+            </div>
+          </div>
+        </div> -->
+
+
+        <h5 class="card-header">Assignee Informations</h5>
+        <div class="card-body border-top">
+          <div class="row">
+            <div class="col-12">
+              
             </div>
           </div>
         </div>

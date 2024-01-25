@@ -65,6 +65,7 @@ export class CheckOrderComponent implements OnInit {
   thirdDocList: any[] = [];
   bankSlipNotice!: boolean;
   paymentStatus!: number;
+  orderStatus!: number;
 
   constructor(private activatedRoute: ActivatedRoute, private orderService: OrderService, private spinner: NgxSpinnerService
             , private formBuilder: FormBuilder, private tostr: ToastrService, private notaryService: NotaryService) {}
@@ -127,7 +128,7 @@ export class CheckOrderComponent implements OnInit {
         this.thirdDocList.push(dataList.data[0].thirdDocType)
 
         this.bankSlipNotice = dataList.data[0].showNotice;
-        this.paymentStatus = dataList.data[0].paymentStatus;
+        this.orderStatus = dataList.data[0].orderStatus;
       }
     })
   }

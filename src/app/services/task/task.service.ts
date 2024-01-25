@@ -20,6 +20,11 @@ export class TaskService {
     return this.http.post(path, requestParamModel)
   }
 
+  getCSServiceTaskList(requestParamModel: Request) {
+    const path = environment.appURL + "get-cs-task-list";
+    return this.http.post(path, requestParamModel)
+  }
+
   uploadTranslatedDocuments(requestParamModel: FormData) {
     const path = environment.appURL + "upload-translated-docs";
     return this.http.post(path, requestParamModel);

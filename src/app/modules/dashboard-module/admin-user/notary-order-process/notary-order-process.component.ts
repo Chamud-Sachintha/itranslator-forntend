@@ -28,6 +28,7 @@ export class NotaryOrderProcessComponent implements OnInit {
   isPaymentSet = false;
   notarydDocumentsList: File[] = [];
   uploadedDocuementList: NotaryDocument[] = [];
+  isCustomerComplete = false;
   invoiceNo!: string;
 
   constructor(private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder, private notaryService: NotaryService
@@ -164,6 +165,10 @@ export class NotaryOrderProcessComponent implements OnInit {
         this.firstDocList.push(dataList.data[0].firstDocType)
         this.secondDocList.push(dataList.data[0].secondDocType)
         this.thirdDocList.push(dataList.data[0].thirdDocType)
+
+        if (dataList.data[0].isCustomerComplete == 1) {
+          this.isCustomerComplete = true;
+        }
       }
     })
   }

@@ -54,6 +54,7 @@ export class CsOrderProcessComponent implements OnInit {
     this.initFifthServiceForm();
     this.initSixthServiceForm();
     this.initSevenServiceForm();
+    this.getPaymentStatus();
   }
 
   onClickSetPaymentInfo() {
@@ -246,6 +247,21 @@ export class CsOrderProcessComponent implements OnInit {
         } else {
 
         }
+      }
+    })
+  }
+
+  getPaymentStatus() {
+    this.requestParamModel.token = sessionStorage.getItem("authToken");
+    this.requestParamModel.flag = sessionStorage.getItem("role");
+    this.requestParamModel.invoiceNo = this.invoiceNo;
+
+    this.csService.getCsOrderPaymentStatus(this.requestParamModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        this.isPaymentSet = dataList.data[0].isOrderPaymentSet;
       }
     })
   }

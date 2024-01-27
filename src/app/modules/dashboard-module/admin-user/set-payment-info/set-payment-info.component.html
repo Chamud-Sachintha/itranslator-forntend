@@ -22,7 +22,7 @@
         </div>
     </div>
 </div>
-<div class="row">
+<div class="row" *ngIf="!this.csServiceForm">
     <div class="col-12">
         <div class="card">
             <h5 class="card-header">Process Notary Service Order</h5>
@@ -187,6 +187,233 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-1">
+                            <button class="btn btn-primary btn-sm" type="submit">Save</button>
+                        </div>
+                        <div class="col-4">
+                            <button class="btn btn-info btn-sm" (click)="onClickBackBtn()">Back</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" *ngIf="this.csServiceForm">
+    <div class="col-12">
+        <div class="card">
+            <h5 class="card-header">Process Notary Service Order</h5>
+            <div class="card-body">
+                <form [formGroup]="csPaymentForm" (ngSubmit)="onSubmitCsPaymentLogForm()">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for=""> මාගසම් නාමය අනුමතකරවා ගැනීම / Company Name Approval</label>
+                            <input type="text" class="form-control" formControlName="companyNameApproval">
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">Form 01</label>
+                            <input type="text" class="form-control" formControlName="form1">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">Form 10</label>
+                            <input type="text" class="form-control" formControlName="form10">
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">Form 13</label>
+                            <input type="text" class="form-control" formControlName="form13">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">Form 15</label>
+                            <input type="text" class="form-control" formControlName="form15">
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">Form 18</label>
+                            <input type="text" class="form-control" formControlName="form18">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">Form 19</label>
+                            <input type="text" class="form-control" formControlName="form19">
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">Form 20</label>
+                            <input type="text" class="form-control" formControlName="form20">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">පිටපත් ගා ්තු / Copy charges</label>
+                            <input type="text" class="form-control" formControlName="copyCharges">
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">ආර්ි කේ ැකසුම් ගා ්තු / Article processing fees</label>
+                            <input type="text" class="form-control" formControlName="articleFees">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for=""> ංසශෝධන ගා ්තු / Amendment fees</label>
+                            <input type="text" class="form-control" formControlName="amendmendFees">
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">මාසික / වාර්ශික ගා ්තු / Monthly / Annual Fees</label>
+                            <input type="text" class="form-control" formControlName="annualFees">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">ෙඩ අයණීීමම් / Penalties</label>
+                            <input type="text" class="form-control" formControlName="panalties">
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">සවනත් / Other</label>
+                            <input type="text" class="form-control" formControlName="other">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">රජසේ මුද්ෙර ගා ්තු / Government Stamp Duty</label>
+                            <input type="text" class="form-control" formControlName="govStampDuty">
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">ලියා පදිංචි ණීීමසම් ගා ්තු / Written settlement fees</label>
+                            <input type="text" class="form-control" formControlName="writenSettlementFees">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">ප්‍රවාහන ගා ්තු / Transportation charges</label>
+                            <input type="text" class="form-control" formControlName="transpotationFees">
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">මාගම් සේකම් ගා ්තු / Company Secretarial Fees</label>
+                            <input type="text" class="form-control" formControlName="companySecFees">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">කයානම් ස ේවා ගා ්තු / Expedited service charges</label>
+                            <input type="text" class="form-control" formControlName="expServiceCharges">
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">හ දන්වාදීසම් සකොමි ් / Referral commission</label>
+                            <input type="text" class="form-control" formControlName="refCommision">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">තැපැේ ගා ්තු / Postage charges</label>
+                            <input type="text" class="form-control" formControlName="postageCharge">
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <div class="row">
+                                <div class="col-11">
+                                    <label for="">ස ේවාව ැපයීම ෙහා ම්පූර්ණ අය ණීීමම / Full charge for service provision</label>
+                                </div>
+                                <div class="col-1"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="text" class="form-control" formControlName="fullChargeOfServiceProvision">
+                                </div>
+                                <div class="col-6">
+                                    <button class="btn btn-primary btn-sm" (click)="setCsPayTotalAmount()">Calculate Total</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">පලමු අත්තිකාරම / First advance</label>
+                            <input type="text" class="form-control" formControlName="firstAdvance">
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">සෙවන අත්තිකාරම / Second advance</label>
+                            <input type="text" class="form-control" formControlName="secondAdvance">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">තුන්වන අත්තිකාරම / Third advance</label>
+                            <input type="text" class="form-control" formControlName="thirdAdvance">
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">හතරවන අත්තිකාරම / Fourth advance</label>
+                            <input type="text" class="form-control" formControlName="forthAdvance">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">ප ්වන අත්තිකාරම / Fifth advance</label>
+                            <input type="text" class="form-control" formControlName="fifthAdvance">
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">අව න් සගවීම / Final payment</label>
+                            <input type="text" class="form-control" formControlName="finalPayment">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">හිග මුෙල / Amount in arrears</label>
+                            <input type="text" class="form-control" formControlName="amountInArreas">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <label for="">සි දකල යුතු වැඩ කාර්යය වි ්තරය / Description of work to be done</label>
+                            <textarea name="" class="form-control" id="" cols="30" rows="10" formControlName="descriptionOfService"></textarea>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">රැසගන යන දිනය / Pick up date</label>
+                            <input type="date" class="form-control" formControlName="pickUpDate">
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">ඉදිරිපත් කරන දිනය / Date of submission</label>
+                            <input type="date" class="form-control" formControlName="dateOfSubmission">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">තැපැේ කරන දිනය / Date of mailing</label>
+                            <input type="date" class="form-control" formControlName="dateOfMailing">
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">ලියාපදිංචි කරන දිනය / Date of registration</label>
+                            <input type="date" class="form-control" formControlName="dateOfRegistration">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <label for="">මුද්ෙර ගා ්තුව / Stamp Duty</label>
+                            <input type="text" class="form-control" formControlName="stampDuty">
+                        </div>
+                        <!-- <div class="col-md-6 col-lg-6 col-sm-12">
+                            <div class="row">
+                                <div class="col-11">
+                                    <label for="">මුද්ෙර ගා ්තුව / Total Amount</label>
+                                </div>
+                                <div class="col-1">
+                                    
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="text" class="form-control" formControlName="totalAmount">
+                                </div>
+                                <div class="col-6">
+                                    <button class="btn btn-primary btn-sm" (click)="onClickSetTotalAmount()">Calculate Total Amount</button>
+                                </div>
+                            </div>
+                        </div> -->
                     </div>
                     <div class="row mt-3">
                         <div class="col-1">

@@ -8,4 +8,6 @@ export class Request {
     document!: string;
     paymentStatus!: string;
     orderStatus!: string;
+    categoryId!: string;
+    categoryName!: string;
 }

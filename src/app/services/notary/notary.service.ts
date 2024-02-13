@@ -63,4 +63,19 @@ export class NotaryService {
     const path = environment.appURL + "get-ns-order-request-list";
     return this.http.post(path, requestParamModel);
   }
+
+  updateMainNotaryCategory(requestParamModel: Request) {
+    const path = environment.appURL + "update-main-notary-category";
+    return this.http.post(path, requestParamModel);
+  }
+
+  getAllSubNotaryCategoryList(requestParamModel: Request) {
+    const path = environment.appURL + "get-sub-ns-category-list";
+    return this.http.post(path, requestParamModel);
+  }
+
+  updateSubNotaryCategoryById(requestParamModel: Request) {
+    const path = environment.appURL + "update-sub-ns-category";
+    return this.http.post(path, requestParamModel);
+  }
 }

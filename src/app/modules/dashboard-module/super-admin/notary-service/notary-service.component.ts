@@ -5,6 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { NotaryService } from 'src/app/services/notary/notary.service';
 import { MainNotaryCategory } from 'src/app/shared/models/MainNotaryCategory/main-notary-category';
+import { Request } from 'src/app/shared/models/Request/request';
 import { SearchParam } from 'src/app/shared/models/SearchParam/search-param';
 import { SubNotaryCategory } from 'src/app/shared/models/SubNotaryCategory/sub-notary-category';
 
@@ -17,10 +18,17 @@ export class NotaryServiceComponent implements OnInit {
 
   mainNotaryCategoryForm!: FormGroup;
   subNotaryCategoryForm!: FormGroup;
+  updateMainNotaryForm!: FormGroup;
+  updateSubnotaryForm!: FormGroup;
   mainCategoryModel = new MainNotaryCategory();
   subCategoryModel = new SubNotaryCategory();
   searchParamModel = new SearchParam();
   mainNotaryCategoryList: MainNotaryCategory[] = [];
+  subNotaryCategoryList: SubNotaryCategory[] = [];
+  requestParamModel = new Request();
+  categoryId!: string;
+  mainCategoryUpdate = false;
+  subCategoryUpdate = false;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private notaryService: NotaryService
             , private tostr: ToastrService, private spinner: NgxSpinnerService) {}
@@ -30,10 +38,96 @@ export class NotaryServiceComponent implements OnInit {
     this.initSubNotaryCategoryForm();
     this.loadMainCategoryList();
     this.loadSubCategoryList();
+    this.initUpdateMainNotaryForm();
+    this.initUpdateSubCategoryForm();
+  }
+
+  setId(categoryId: string, categoryName: string, type: number) {
+    this.categoryId = categoryId;
+
+    if (type == 1) {
+      this.updateMainNotaryForm.controls['categoryName'].setValue(categoryName);
+      this.mainCategoryUpdate = true;
+      this.subCategoryUpdate = false;
+    } else {
+      this.updateSubnotaryForm.controls['categoryName'].setValue(categoryName);
+      this.mainCategoryUpdate = false;
+      this.subCategoryUpdate = true;
+    }
+  }
+
+  onSubmitSubCategoryUpdateform() {
+    const categoryName = this.updateSubnotaryForm.controls['categoryName'].value;
+
+    if (categoryName == "") {
+      this.tostr.error("Empty Field Found", "Please Enter Category Name");
+    } else {
+      this.requestParamModel.token = sessionStorage.getItem("authToken");
+      this.requestParamModel.flag = sessionStorage.getItem("role");
+      this.requestParamModel.categoryId = this.categoryId;
+      this.requestParamModel.categoryName = categoryName;
+
+      this.notaryService.updateSubNotaryCategoryById(this.requestParamModel).subscribe((resp: any) => {
+
+        if (resp.code === 1) {
+          this.tostr.success("Update Main Notary Category", "Updated Successfully");
+        } else {
+          this.tostr.error("Update Main Notary Categeory", resp.message);
+        }
+      })
+    }
+  }
+
+  onSubmitUpdateMainNotaryForm() {
+    const categoryName = this.updateMainNotaryForm.controls['categoryName'].value;
+
+    if (categoryName == "") {
+      this.tostr.error("Empty Field Found", "Please Enter Category Name");
+    } else {
+      this.requestParamModel.token = sessionStorage.getItem("authToken");
+      this.requestParamModel.flag = sessionStorage.getItem("role");
+      this.requestParamModel.categoryId = this.categoryId;
+      this.requestParamModel.categoryName = categoryName;
+
+      this.notaryService.updateMainNotaryCategory(this.requestParamModel).subscribe((resp: any) => {
+        if (resp.code === 1) {
+          this.tostr.success("Update Main Notary Category", "Updated Successfully");
+        } else {
+          this.tostr.error("Update Main Notary Categeory", resp.message);
+        }
+      })
+    }
+  }
+
+  initUpdateMainNotaryForm() {
+    this.updateMainNotaryForm = this.formBuilder.group({
+      categoryName: ['', Validators.required]
+    })
+  }
+
+  initUpdateSubCategoryForm() {
+    this.updateSubnotaryForm = this.formBuilder.group({
+      categoryName: ['', Validators.required]
+    })
   }
 
   loadSubCategoryList() {
+    this.requestParamModel.token = sessionStorage.getItem("authToken");
+    this.requestParamModel.flag = sessionStorage.getItem("role");
 
+    this.notaryService.getAllSubNotaryCategoryList(this.requestParamModel).subscribe((resp: any) => {
+
+      const dataList = JSON.parse(JSON.stringify(resp));
+
+      if (resp.code === 1) {
+        dataList.data[0].forEach((eachCategory: SubNotaryCategory) => {
+          const formatedDate = parseInt(eachCategory.createTime) * 1000;
+          eachCategory.createTime = formatedDate.toString();
+
+          this.subNotaryCategoryList.push(eachCategory);
+        })
+      }
+    })
   }
 
   onSubmitSubCategoryForm() {

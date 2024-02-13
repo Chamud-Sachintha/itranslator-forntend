@@ -57,7 +57,8 @@
                                         <td>{{ eachCategory.categoryName }}</td>
                                         <td>{{ eachCategory.createTime | date }}</td>
                                         <td>
-                                            <button class="btn btn-primary btn-sm">Update</button>
+                                            <button class="btn btn-primary btn-sm" data-toggle="modal"
+                                            data-target="#exampleModal" (click)="setId(eachCategory.id, eachCategory.categoryName, 1)">Update</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -118,12 +119,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let eachCategory of this.mainNotaryCategoryList; index as i">
+                                    <tr *ngFor="let eachCategory of this.subNotaryCategoryList; index as i">
                                         <td>{{ i + 1 }}</td>
-                                        <td>{{ eachCategory.categoryName }}</td>
+                                        <td>{{ eachCategory.subCategoryName }}</td>
                                         <td>{{ eachCategory.createTime | date }}</td>
                                         <td>
-                                            <button class="btn btn-primary btn-sm">Update</button>
+                                            <button class="btn btn-primary btn-sm" data-toggle="modal"
+                                            data-target="#exampleModal" (click)="setId(eachCategory.id, eachCategory.subCategoryName, 2)">Update</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -139,6 +141,43 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </a>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="updateMainNotaryForm" (ngSubmit)="onSubmitUpdateMainNotaryForm()" *ngIf="this.mainCategoryUpdate">
+                    <div class="row">
+                        <div class="col-12">
+                            <label for="">Change Main Notary Category Name</label>
+                            <input type="text" class="form-control" formControlName="categoryName">
+                        </div>
+                        <div class="col-12 mt-3">
+                            <button class="btn btn-primary btn-sm" type="submit">Save</button>
+                        </div>
+                    </div>
+                </form>
+
+                <form [formGroup]="updateSubnotaryForm" (ngSubmit)="onSubmitSubCategoryUpdateform()" *ngIf="subCategoryUpdate">
+                    <div class="row">
+                        <div class="col-12">
+                            <label for="">Change Sub Notary Category Name</label>
+                            <input type="text" class="form-control" formControlName="categoryName">
+                        </div>
+                        <div class="col-12 mt-3">
+                            <button class="btn btn-primary btn-sm" type="submit">Save</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

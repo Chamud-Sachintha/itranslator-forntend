@@ -7,6 +7,8 @@ import { NotaryService } from 'src/app/services/notary/notary.service';
 import { NotaryDocument } from 'src/app/shared/models/NotaryDocument/notary-document';
 import { Request } from 'src/app/shared/models/Request/request';
 import { environment } from 'src/environments/environment.development';
+import { OrderMessage } from 'src/app/shared/models/OrderMessage/order-message';
+import { Subscription, switchMap, timer } from 'rxjs';
 
 @Component({
   selector: 'app-notary-order-process',
@@ -16,6 +18,7 @@ import { environment } from 'src/environments/environment.development';
 export class NotaryOrderProcessComponent implements OnInit {
 
   requestParamModel = new Request();
+  subscription !: Subscription;
   firstDocList: any[] = [];
   secondDocList: any[] = [];
   thirdDocList: any[] = [];
@@ -28,6 +31,7 @@ export class NotaryOrderProcessComponent implements OnInit {
   isPaymentSet = false;
   notarydDocumentsList: File[] = [];
   uploadedDocuementList: NotaryDocument[] = [];
+  orderMessageList: OrderMessage[] = [];
   isCustomerComplete = false;
   invoiceNo!: string;
 
@@ -40,6 +44,27 @@ export class NotaryOrderProcessComponent implements OnInit {
     this.loadNotaryOrderInfo();
     this.getPaymentStatus();
     this.loadNotaryDocumentList();
+
+    
+
+    this.requestParamModel.token = sessionStorage.getItem("authToken");
+    this.requestParamModel.flag = sessionStorage.getItem("role");
+
+    this.subscription = timer(0, 6000).pipe(
+
+      switchMap(() => this.notaryService.getOrderMessageList(this.requestParamModel))
+
+    ).subscribe((result: any) => {
+      this.orderMessageList = [];
+      const dataList = JSON.parse(JSON.stringify(result))
+
+      dataList.data[0].forEach((eachData: OrderMessage) => {
+        const formatedDate = parseInt(eachData.time) * 1000;
+        eachData.time = formatedDate.toString();
+
+        this.orderMessageList.push(eachData);
+      })
+    });
   }
 
   onClickUpdateOrderStatus(orderStatus: string) {
@@ -62,16 +87,20 @@ export class NotaryOrderProcessComponent implements OnInit {
   }
 
   onClickRemoveDocument(documentName: string) {
+    console.log(documentName);
     this.requestParamModel.token = sessionStorage.getItem("authToken");
     this.requestParamModel.flag = sessionStorage.getItem("role");
     this.requestParamModel.document = documentName;
 
-    // this.notaryService.removeDocument(this.requestMode).subscribe((resp: any) => {
+     this.notaryService.removeDocument(this.requestParamModel).subscribe((resp: any) => {
 
-    //   if (resp.code === 1) {
-        
-    //   }
-    // })
+       if (resp.code === 1) {
+        this.tostr.success("Submit Documents.", "Document Remove Successfully");
+        window.location.reload();
+       }else{
+        this.tostr.error(" remove error Documents", resp.message);
+       }
+     })
   }
 
   onClickViewDocument(documentName: string) {
@@ -184,6 +213,30 @@ export class NotaryOrderProcessComponent implements OnInit {
 
       if (resp.code === 1) {
         this.isPaymentSet = dataList.data[0].isOrderPaymentSet;
+      }
+    })
+  }
+
+
+  onClickProcessOrder() {
+    console.log('runpayment update',this.invoiceNo);
+    this.router.navigate(['/app/ns-order/set-pay-info', this.invoiceNo])
+   // this.router.navigate(['/app/ns-order/' + invoiceNo]);
+  }
+
+  sendAdminMessage(message: string) {
+    this.requestParamModel.token = sessionStorage.getItem("authToken");
+    this.requestParamModel.flag = sessionStorage.getItem("role");
+    this.requestParamModel.invoiceNo = this.invoiceNo;
+    this.requestParamModel.message = message;
+
+    this.notaryService.sendAdminOrderMessage(this.requestParamModel).subscribe((resp: any) => {
+    //console.log(resp.code);
+      if (resp.code === 1) {
+        this.tostr.success("Send Admin Message", "Message Sent Successfully.");
+        location.reload();
+      } else {
+        this.tostr.error("Send Admin Message", resp.message);
       }
     })
   }

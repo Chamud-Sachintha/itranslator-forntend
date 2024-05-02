@@ -98,7 +98,7 @@
                                                 <td>1</td>
                                                 <td>Payment Info is Set</td>
                                                 <td>
-                                                    <button class="btn btn-primary btn-sm">Update</button>
+                                                    <button class="btn btn-primary btn-sm" (click)="onClickProcessOrder()">Update</button>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -183,7 +183,7 @@
                 <div class="row">
                     <div class="col-12">
                         <textarea name="" id="" cols="30" rows="10" class="form-control" #message></textarea>
-                        <button class="btn btn-primary btn-sm mt-3">Send Message</button>
+                        <button class="btn btn-primary btn-sm mt-3" (click)="sendAdminMessage(message.value)">Send Message</button>
                     </div>
                 </div>
             </div>
@@ -194,10 +194,10 @@
                         <h6 class="card-subtitle">Latest Comments section by users</h6>
                     </div>
 
-                    <!-- <div class="comment-widgets m-b-20" *ngFor="let eachMessage of this.adminLessageList">
-    
+                    <div class="comment-widgets m-b-20" *ngFor="let eachMessage of this.orderMessageList">
+        
                         <div class="d-flex flex-row comment-row">
-                            <div class="p-2"><span class="round"><img src="{{ eachMessage.avatar }}"
+                            <div class="p-2"><span class="round"><img src="https://i.imgur.com/uIgDDDd.jpg"
                                         alt="user" width="50"></span></div>
                             <div class="comment-text w-100">
                                 <h5>{{ this.eachMessage.fromUser }}</h5>
@@ -213,7 +213,7 @@
                                     </p>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                 </div>
             </div>
 

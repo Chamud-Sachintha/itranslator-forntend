@@ -78,4 +78,20 @@ export class NotaryService {
     const path = environment.appURL + "update-sub-ns-category";
     return this.http.post(path, requestParamModel);
   }
+
+  removeDocument(requestParamModel: Request)
+  {
+    const path = environment.appURL + "Remove-documents";
+    return this.http.post(path, requestParamModel);
+  }
+
+  sendAdminOrderMessage(requestParamModel: Request) {
+    const path = environment.appURL + "send-admin-message";
+    return this.http.post(path, requestParamModel);
+  }
+
+  getOrderMessageList(requestParamModel: Request) {
+    const path = environment.appURL + "get-order-message-list";
+    return this.http.post(path, requestParamModel);
+  }
 }

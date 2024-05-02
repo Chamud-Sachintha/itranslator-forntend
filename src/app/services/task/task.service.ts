@@ -15,13 +15,28 @@ export class TaskService {
     return this.http.post(path, requestParamModel);
   }
 
+  getCompleteTranslateTaskList(requestParamModel: Request) {
+    const path = environment.appURL + "get-complete-tr-task-list";
+    return this.http.post(path, requestParamModel);
+  }
+
   getNotaryServiceTaskList(requestParamModel: Request) {
     const path = environment.appURL + "get-ns-task-list";
     return this.http.post(path, requestParamModel)
   }
 
+  getCompleteNotaryServiceTaskList(requestParamModel: Request) {
+    const path = environment.appURL + "get-complete-ns-task-list";
+    return this.http.post(path, requestParamModel)
+  }
+
   getCSServiceTaskList(requestParamModel: Request) {
     const path = environment.appURL + "get-cs-task-list";
+    return this.http.post(path, requestParamModel)
+  }
+
+  getCompleteCSServiceTaskList(requestParamModel: Request) {
+    const path = environment.appURL + "get-complete-cs-task-list";
     return this.http.post(path, requestParamModel)
   }
 

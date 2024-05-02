@@ -24,6 +24,9 @@ import { SetPaymentInfoComponent } from './admin-user/set-payment-info/set-payme
 import { CsServiceRequestsComponent } from './admin-user/cs-service-requests/cs-service-requests.component';
 import { CsTaskComponent } from './admin-user/cs-task/cs-task.component';
 import { CsOrderProcessComponent } from './admin-user/cs-order-process/cs-order-process.component';
+import { CompleteTrOrdersComponent } from './admin-user/complete-tr-orders/complete-tr-orders.component';
+import { CompleteNsOrdersComponent } from './admin-user/complete-ns-orders/complete-ns-orders.component';
+import { CompleteCsOrdersComponent } from './admin-user/complete-cs-orders/complete-cs-orders.component';
 
 const routes: Routes = [
   {
@@ -108,6 +111,18 @@ const routes: Routes = [
       {
         path: 'ns-order/set-pay-info/:invoiceNo',
         component: SetPaymentInfoComponent
+      },
+      {
+        path: 'complete-tr-orders',
+        component: CompleteTrOrdersComponent
+      },
+      {
+        path: 'complete-order-requests',
+        component: CompleteNsOrdersComponent
+      },
+      {
+        path: 'complete-cs-order-requests',
+        component: CompleteCsOrdersComponent
       },
 
       // super admin menu paths

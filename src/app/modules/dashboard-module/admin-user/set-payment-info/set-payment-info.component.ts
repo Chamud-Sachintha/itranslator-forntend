@@ -426,6 +426,7 @@ export class SetPaymentInfoComponent implements OnInit {
 
       if (resp.code === 1) {
         this.tostr.success("Add Payment log", "Payment Log Added");
+        this.router.navigate(['/app/ns-order', this.invoiceNo]);
       } else {
         this.tostr.error("Add Payment log", resp.message);
       }

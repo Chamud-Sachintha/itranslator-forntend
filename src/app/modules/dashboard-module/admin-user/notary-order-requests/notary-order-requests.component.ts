@@ -24,7 +24,7 @@ export class NotaryOrderRequestsComponent implements OnInit {
     this.requestMode.token = sessionStorage.getItem("authToken");
     this.requestMode.flag = sessionStorage.getItem("role");
 
-    this.subscription = timer(0, 60000).pipe(
+    this.subscription = timer(0, 1500).pipe(
 
       switchMap(() => this.orderService.getNotaryOrderList(this.requestMode))
 

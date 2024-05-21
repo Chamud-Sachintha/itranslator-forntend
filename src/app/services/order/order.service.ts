@@ -15,6 +15,11 @@ export class OrderService {
     return this.http.post(path, requestParam);
   }
 
+  assinLgOrder(requestModel: Request) {
+    const path = environment.appURL + "assign-lg-order";
+    return this.http.post(path, requestModel);
+  }
+
   assinOrder(requestModel: Request) {
     const path = environment.appURL + "assign-order";
     return this.http.post(path, requestModel);
@@ -27,6 +32,16 @@ export class OrderService {
 
   getCSOrderList(requestModel: Request) {
     const path = environment.appURL + "get-cs-orders";
+    return this.http.post(path, requestModel);
+  }
+
+  getLgOrderList(requestModel: Request) {
+    const path = environment.appURL + "get-lg-orders";
+    return this.http.post(path, requestModel);
+  }
+
+  getLgTaskList(requestModel: Request) {
+    const path = environment.appURL + "get-lg-Task";
     return this.http.post(path, requestModel);
   }
 
@@ -63,5 +78,15 @@ export class OrderService {
   updateOrderStatus(requestParamModel: Request) {
     const path = environment.appURL + "update-order-status";
     return this.http.post(path, requestParamModel);
+  }
+
+  getOrderMessageList(requestModel: Request){
+    const path = environment.appURL + "get-admin-Lmessage";
+    return this.http.post(path, requestModel);
+  }
+
+  sendAdminLegalMessage(formData:FormData){
+    const path = environment.appURL + "send-admin-Lmessage";
+    return this.http.post(path, formData);
   }
 }

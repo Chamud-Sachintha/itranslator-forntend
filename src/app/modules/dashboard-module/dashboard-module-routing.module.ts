@@ -27,6 +27,8 @@ import { CsOrderProcessComponent } from './admin-user/cs-order-process/cs-order-
 import { CompleteTrOrdersComponent } from './admin-user/complete-tr-orders/complete-tr-orders.component';
 import { CompleteNsOrdersComponent } from './admin-user/complete-ns-orders/complete-ns-orders.component';
 import { CompleteCsOrdersComponent } from './admin-user/complete-cs-orders/complete-cs-orders.component';
+import { LgOrderRequestComponent} from './admin-user/lg-order-request/lg-order-request.component';
+import { LgOrderProcessComponent } from './admin-user/lg-order-process/lg-order-process.component';
 
 const routes: Routes = [
   {
@@ -85,6 +87,10 @@ const routes: Routes = [
         component: CsServiceRequestsComponent
       },
       {
+        path: 'lg-orders',
+        component: LgOrderRequestComponent
+      },
+      {
         path: 'tr-task-list',
         component: TranslateTaskComponent
       },
@@ -95,6 +101,10 @@ const routes: Routes = [
       {
         path: 'cs-task-list',
         component: CsTaskComponent
+      },
+      {
+        path: 'lg-task-list',
+        component: LgOrderProcessComponent
       },
       {
         path: 'tr-order/:invoiceId',

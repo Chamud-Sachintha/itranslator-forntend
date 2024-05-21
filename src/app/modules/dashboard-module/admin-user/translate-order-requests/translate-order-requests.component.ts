@@ -32,7 +32,7 @@ export class TranslateOrderRequestsComponent implements OnInit {
     ).subscribe((result: any) => {
       this.translateOrderList = [];
       const data = JSON.parse(JSON.stringify(result))
-
+      this.spinner.hide();
       data.data[0].forEach((eachData: TranslateOrder) => {
         const formatedDate = parseInt(eachData.createTime) * 1000;
         eachData.createTime = formatedDate.toString();

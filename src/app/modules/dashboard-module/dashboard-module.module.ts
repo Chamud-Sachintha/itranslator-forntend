@@ -33,6 +33,7 @@ import { CompleteTrOrdersComponent } from './admin-user/complete-tr-orders/compl
 import { CompleteCsOrdersComponent } from './admin-user/complete-cs-orders/complete-cs-orders.component';
 import { LgOrderRequestComponent } from './admin-user/lg-order-request/lg-order-request.component';
 import { LgOrderProcessComponent } from './admin-user/lg-order-process/lg-order-process.component';
+import { CompleteLgOrdersComponent } from './admin-user/complete-lg-orders/complete-lg-orders.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { LgOrderProcessComponent } from './admin-user/lg-order-process/lg-order-
     CompleteCsOrdersComponent,
     LgOrderRequestComponent,
     LgOrderProcessComponent,
+    CompleteLgOrdersComponent,
   ],
   imports: [
     CommonModule,

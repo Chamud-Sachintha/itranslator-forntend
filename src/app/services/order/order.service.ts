@@ -45,6 +45,11 @@ export class OrderService {
     return this.http.post(path, requestModel);
   }
 
+  getLgCompleteList(requestModel: Request) {
+    const path = environment.appURL + "get-lg-Complete";
+    return this.http.post(path, requestModel);
+  }
+
   getOrderInfoByInvoice(requestModel: Request) {
     const path = environment.appURL + "get-order-info-by-invoice";
     return this.http.post(path, requestModel);
@@ -89,4 +94,21 @@ export class OrderService {
     const path = environment.appURL + "send-admin-Lmessage";
     return this.http.post(path, formData);
   }
+
+
+  getOrderDocList(requestModel: Request){
+    const path = environment.appURL + "get-lgODoc-List";
+    return this.http.post(path, requestModel);
+  }
+
+  getLegalAdviceDoc(requestModel: Request){
+    const path = environment.appURL + "get-lgDoc-List";
+    return this.http.post(path, requestModel);
+  }
+
+  ViewDoc(requestModel: Request){
+    const path = environment.appURL + "view-lgDoc";
+    return this.http.post(path, requestModel);
+  }
+
 }

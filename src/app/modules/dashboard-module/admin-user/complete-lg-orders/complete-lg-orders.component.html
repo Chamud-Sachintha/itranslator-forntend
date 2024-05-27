@@ -31,13 +31,14 @@
                                         <th>Create Time</th>
                                        
                                         <th> Documents</th>
-                                        <th>Actions</th>
+                                        <th> Chat</th>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
                                    <tr *ngFor="let eachOrder of lgOrderList">
                                         <td>{{ eachOrder.OrderNo }}</td>
-                                        <td *ngIf="eachOrder.Status == '1'">Accepts</td>
+                                        <td *ngIf="eachOrder.Status == '2'">Complete</td>
                                         <td>{{ eachOrder.createTime | date:'short' }}</td>
                                        
                                         <td>
@@ -55,7 +56,8 @@
                                         <th>Create Time</th>
                                        
                                         <th> Documents</th>
-                                        <th>Actions</th>
+                                        <th> Chat</th>
+                                        
                                     </tr>
                                 </tfoot>
                             </table>
@@ -106,27 +108,7 @@
                     </div> 
                     
                 </div>
-                <div class="card-body border-top">
-                    <div class="row">
-                        <form [formGroup]="lgForm" (ngSubmit)="sendOrderMessageToAdmin()">
-                            
-                            <div class="col-12">
-                                <div class="col-12 mt-4">
-                                    <textarea name="" formControlName="message" id="" cols="30" rows="10" class="form-control" #message></textarea>
-                                </div>
-                                
-                                <div class="col-12 mt-2">
-                                    <label for="">Additional File</label>
-                                    <input type="file" class="form-control" formControlName="Doc" multiple (change)="onChangeSecondDoc($event)">
-                                </div>
-                                <div class="col-12 mt-2">
-                                    <button class="btn btn-primary btn-sm mt-3" type="submit">Send Message</button>
-                                </div>
-                                
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                
                 <div class="row">
                     
                 </div>

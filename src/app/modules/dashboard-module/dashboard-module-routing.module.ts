@@ -29,6 +29,7 @@ import { CompleteNsOrdersComponent } from './admin-user/complete-ns-orders/compl
 import { CompleteCsOrdersComponent } from './admin-user/complete-cs-orders/complete-cs-orders.component';
 import { LgOrderRequestComponent} from './admin-user/lg-order-request/lg-order-request.component';
 import { LgOrderProcessComponent } from './admin-user/lg-order-process/lg-order-process.component';
+import { CompleteLgOrdersComponent } from './admin-user/complete-lg-orders/complete-lg-orders.component';
 
 const routes: Routes = [
   {
@@ -133,6 +134,10 @@ const routes: Routes = [
       {
         path: 'complete-cs-order-requests',
         component: CompleteCsOrdersComponent
+      },
+      {
+        path: 'complete-legal-order-requests',
+        component: CompleteLgOrdersComponent
       },
 
       // super admin menu paths

@@ -11,4 +11,5 @@ export class Request {
     orderStatus!: string;
     categoryId!: string;
     categoryName!: string;
+    DocName!: string;
 }

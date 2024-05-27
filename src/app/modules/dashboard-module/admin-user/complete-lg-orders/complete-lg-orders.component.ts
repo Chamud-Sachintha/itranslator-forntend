@@ -8,13 +8,13 @@ import { CSOrder } from 'src/app/shared/models/CSOrder/csorder';
 import { Request } from 'src/app/shared/models/Request/request';
 import { environment } from 'src/environments/environment.development';
 
-
 @Component({
-  selector: 'app-lg-order-process',
-  templateUrl: './lg-order-process.component.html',
-  styleUrls: ['./lg-order-process.component.css']
+  selector: 'app-complete-lg-orders',
+  templateUrl: './complete-lg-orders.component.html',
+  styleUrls: ['./complete-lg-orders.component.css']
 })
-export class LgOrderProcessComponent implements OnInit {
+export class CompleteLgOrdersComponent implements OnInit{
+
   selectedOrder: any;
   isVisible:boolean = false;
   requestMode = new Request();
@@ -43,12 +43,12 @@ export class LgOrderProcessComponent implements OnInit {
   }
 
   getlegaltask(){
-    this.spinner.show();
+   this.spinner.show();
 
     this.requestMode.token = sessionStorage.getItem("authToken");
     this.requestMode.flag = sessionStorage.getItem("role");
    
-    this.orderService.getLgTaskList(this.requestMode).subscribe((resp: any) => {
+    this.orderService.getLgCompleteList(this.requestMode).subscribe((resp: any) => {
       this.lgOrderList = resp.data[0];
       this.lgOrderList.forEach(order => {
         order.createTime = new Date(order.createTime * 1000); 
@@ -57,6 +57,7 @@ export class LgOrderProcessComponent implements OnInit {
       
       this.spinner.hide();
     })
+    this.spinner.hide();
   }
 
 
@@ -160,22 +161,16 @@ export class LgOrderProcessComponent implements OnInit {
 
   combineData() {
     try {
-      // Combine the arrays
+      
       const combinedArray = [...this.legalAdvice, ...this.legalAdvice2];
-  
-      // Parse combinedArray only if it's a valid JSON string
       const parsedData = combinedArray.flatMap((item: string) => {
         try {
-          // Check if item is a valid JSON string and parse it
           return item && JSON.parse(item);
         } catch (error) {
-          // Log or handle the error if JSON parsing fails
           console.error('Error parsing item:', item, error);
-          return []; // Return an empty array for invalid JSON
+          return []; 
         }
       });
-  
-      // Update combinedData with parsed and flattened data
       this.combinedData = parsedData;
       console.log('combinedData', this.combinedData);
     } catch (error) {
@@ -211,7 +206,5 @@ export class LgOrderProcessComponent implements OnInit {
 
     
     }
-  
 
-  
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { CsService } from 'src/app/services/cs/cs.service';
 import { Request } from 'src/app/shared/models/Request/request';
 import { environment } from 'src/environments/environment.development';
@@ -41,7 +42,7 @@ export class CsOrderProcessComponent implements OnInit {
   invoiceNo!: string;
 
   constructor(private activatedRoute: ActivatedRoute, private csService: CsService, private formBuilder: FormBuilder
-            , private router: Router) {}
+            , private router: Router, private tostr: ToastrService) {}
 
   ngOnInit(): void {
     this.invoiceNo = this.activatedRoute.snapshot.params['invoiceNo'];
@@ -269,6 +270,22 @@ export class CsOrderProcessComponent implements OnInit {
   onClickViewImage(eachDoc: any) {
     const filePath = environment.csServiceFileUrl + eachDoc;
     window.open(filePath);
+  }
+
+  onClickUpdateOrderStatus(orderStatus: string) {
+    this.requestParamModel.token = sessionStorage.getItem("authToken");
+    this.requestParamModel.flag = sessionStorage.getItem("role");
+    this.requestParamModel.invoiceNo = this.invoiceNo;
+    this.requestParamModel.orderStatus = orderStatus;
+    
+    this.csService.updateNotaryOrderStatus(this.requestParamModel).subscribe((resp: any) => {
+
+      if (resp.code === 1) {
+        this.tostr.success("Update Order Status", "Order Status Updated Successfully.");
+      } else {
+        this.tostr.error("Update Order Status", resp.message);
+      }
+    })
   }
 
 }

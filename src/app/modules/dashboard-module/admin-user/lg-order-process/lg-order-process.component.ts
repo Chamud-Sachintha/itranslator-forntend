@@ -142,7 +142,7 @@ export class LgOrderProcessComponent implements OnInit {
     this.requestMode.OrderNo = order;
 
 
-    this.subscription = timer(0, 6000).pipe(
+    this.subscription = timer(0, 20000).pipe(
       switchMap(() => this.orderService.getOrderDocList(this.requestMode))
     ).subscribe((result: any) => {
       this.legalAdvice = result.data[0]; 

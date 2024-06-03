@@ -25,4 +25,8 @@ export class CsService {
     const path = environment.appURL + "get-cs-order-payment-info";
     return this.http.post(path, requestParamModel);
   }
+  updateNotaryOrderStatus(requestParamModel: Request) {
+    const path = environment.appURL + "update-cs-order-Adminstatus";
+    return this.http.post(path, requestParamModel);
+  }
 }

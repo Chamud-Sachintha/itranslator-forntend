@@ -23,7 +23,7 @@ export class CsServiceRequestsComponent implements OnInit {
     this.requestMode.token = sessionStorage.getItem("authToken");
     this.requestMode.flag = sessionStorage.getItem("role");
 
-    this.subscription = timer(0, 1500).pipe(
+    this.subscription = timer(0, 30000).pipe(
 
       switchMap(() => this.orderService.getCSOrderList(this.requestMode))
 
@@ -36,6 +36,7 @@ export class CsServiceRequestsComponent implements OnInit {
         eachData.createTime = formatedDate.toString();
 
         this.csOrderList.push(eachData);
+        console.log('data cs load>>>>>>>',this.csOrderList);
       })
     });
   }
@@ -51,6 +52,7 @@ export class CsServiceRequestsComponent implements OnInit {
 
       if (resp.code === 1) {
         this.tostr.success("Order Assign", "Order Assign Successfully.");
+        window.location.reload();
       } else {
         this.tostr.error("Order Assign", resp.message);
       }

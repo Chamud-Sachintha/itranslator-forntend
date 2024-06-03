@@ -125,6 +125,8 @@ export class SetPaymentInfoComponent implements OnInit {
 
       if (resp.code === 1) {
         this.tostr.success("Add Payment Log", "Payment Log Added Successfully.");
+        //this.csPaymentForm.reset();
+        window.location.reload(); 
       } else {
         this.tostr.error("Add Payemt Log", resp.message)
       }
@@ -466,6 +468,75 @@ export class SetPaymentInfoComponent implements OnInit {
     })
 
     this.paymentForm.controls['totalAmount'].disable();
+  }
+
+  onInputChange(event: Event){
+    const inputValue = this.validateNaN(parseFloat(this.csPaymentForm.controls['firstAdvance'].value));
+    const totalAmount = this.validateNaN(parseFloat(this.csPaymentForm.controls['fullChargeOfServiceProvision'].value));
+
+    const Arriesamount = totalAmount - inputValue ;
+    this.csPaymentForm.controls['amountInArreas'].setValue(Arriesamount);
+    console.log('Input value changed:', Arriesamount);
+  }
+
+  onInputChange2(event: Event){
+    const inputValue1 = this.validateNaN(parseFloat(this.csPaymentForm.controls['firstAdvance'].value));
+    const inputValue2 = this.validateNaN(parseFloat(this.csPaymentForm.controls['secondAdvance'].value));
+    const totalAmount = this.validateNaN(parseFloat(this.csPaymentForm.controls['fullChargeOfServiceProvision'].value));
+
+    const Arriesamount = totalAmount - inputValue1 - inputValue2 ;
+    this.csPaymentForm.controls['amountInArreas'].setValue(Arriesamount);
+    console.log('Input value changed:', Arriesamount);
+  }
+
+  onInputChange3(event: Event){
+    const inputValue1 = this.validateNaN(parseFloat(this.csPaymentForm.controls['firstAdvance'].value));
+    const inputValue2 = this.validateNaN(parseFloat(this.csPaymentForm.controls['secondAdvance'].value));
+    const inputValue3 = this.validateNaN(parseFloat(this.csPaymentForm.controls['thirdAdvance'].value));
+    const totalAmount = this.validateNaN(parseFloat(this.csPaymentForm.controls['fullChargeOfServiceProvision'].value));
+
+    const Arriesamount = totalAmount - inputValue1 - inputValue2 - inputValue3 ;
+    this.csPaymentForm.controls['amountInArreas'].setValue(Arriesamount);
+    console.log('Input value changed:', Arriesamount);
+  }
+
+  onInputChange4(event: Event){
+    const inputValue1 = this.validateNaN(parseFloat(this.csPaymentForm.controls['firstAdvance'].value));
+    const inputValue2 = this.validateNaN(parseFloat(this.csPaymentForm.controls['secondAdvance'].value));
+    const inputValue3= this.validateNaN(parseFloat(this.csPaymentForm.controls['thirdAdvance'].value));
+    const inputValue4 = this.validateNaN(parseFloat(this.csPaymentForm.controls['forthAdvance'].value));
+    const totalAmount = this.validateNaN(parseFloat(this.csPaymentForm.controls['fullChargeOfServiceProvision'].value));
+
+    const Arriesamount = totalAmount - inputValue1 - inputValue2 - inputValue3 - inputValue4 ;
+    this.csPaymentForm.controls['amountInArreas'].setValue(Arriesamount);
+    console.log('Input value changed:', Arriesamount);
+  }
+
+  onInputChange5(event: Event){
+    const inputValue1 = this.validateNaN(parseFloat(this.csPaymentForm.controls['firstAdvance'].value));
+    const inputValue2 = this.validateNaN(parseFloat(this.csPaymentForm.controls['secondAdvance'].value));
+    const inputValue3 = this.validateNaN(parseFloat(this.csPaymentForm.controls['thirdAdvance'].value));
+    const inputValue4 = this.validateNaN(parseFloat(this.csPaymentForm.controls['forthAdvance'].value));
+    const inputValue5 = this.validateNaN(parseFloat(this.csPaymentForm.controls['fifthAdvance'].value));
+    const totalAmount = this.validateNaN(parseFloat(this.csPaymentForm.controls['fullChargeOfServiceProvision'].value));
+
+    const Arriesamount = totalAmount - inputValue1 - inputValue2 - inputValue3 - inputValue4 - inputValue5 ;
+    this.csPaymentForm.controls['amountInArreas'].setValue(Arriesamount);
+    console.log('Input value changed:', Arriesamount);
+  }
+
+  onInputChange6(event: Event){
+    const inputValue1 = this.validateNaN(parseFloat(this.csPaymentForm.controls['firstAdvance'].value));
+    const inputValue2= this.validateNaN(parseFloat(this.csPaymentForm.controls['secondAdvance'].value));
+    const inputValue3 = this.validateNaN(parseFloat(this.csPaymentForm.controls['thirdAdvance'].value));
+    const inputValue4 = this.validateNaN(parseFloat(this.csPaymentForm.controls['forthAdvance'].value));
+    const inputValue5 = this.validateNaN(parseFloat(this.csPaymentForm.controls['fifthAdvance'].value));
+    const inputValue6 = this.validateNaN(parseFloat(this.csPaymentForm.controls['finalPayment'].value));
+    const totalAmount = this.validateNaN(parseFloat(this.csPaymentForm.controls['fullChargeOfServiceProvision'].value));
+
+    const Arriesamount = totalAmount - inputValue1 - inputValue2 - inputValue3 - inputValue4 - inputValue5 - inputValue6 ;
+    this.csPaymentForm.controls['amountInArreas'].setValue(Arriesamount);
+    console.log('Input value changed:', Arriesamount);
   }
 
 }

@@ -274,7 +274,7 @@
                                                 <td>1</td>
                                                 <td>Payment Info is Set</td>
                                                 <td>
-                                                    <button class="btn btn-primary btn-sm">Update</button>
+                                                    <button class="btn btn-primary btn-sm" (click)="onClickSetPaymentInfo()">Update</button>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -289,6 +289,21 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <h5 class="card-header">Order Checking Informations</h5>
+            <div class="card-body border-top">
+                <div class="row">
+                    <div class="col-12">
+                        <label for="">Order Status</label>
+                        <select name="" id="" class="form-control" #orderStatus>
+                            <option value="">-- Select Option --</option>
+                            <option value="2">Complete</option>
+                        </select>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <button class="btn btn-primary btn-sm" (click)="onClickUpdateOrderStatus(orderStatus.value)">Update Order</button>
                     </div>
                 </div>
             </div>

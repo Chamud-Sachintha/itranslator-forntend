@@ -5,11 +5,13 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription, switchMap, timer } from 'rxjs';
 import { OrderService } from 'src/app/services/order/order.service';
+import { SmsService } from 'src/app/services/sms/sms.service';
 import { TaskService } from 'src/app/services/task/task.service';
 import { BCTranslateModel } from 'src/app/shared/models/BCTranslateModel/bctranslate-model';
 import { DCTranslateModel } from 'src/app/shared/models/DCTranslateModel/dctranslate-model';
 import { MCTranslateModel } from 'src/app/shared/models/MCTranslateModel/mctranslate-model';
 import { OrderMessage } from 'src/app/shared/models/OrderMessage/order-message';
+import { OrderNotification } from 'src/app/shared/models/OrderNotification/order-notification';
 import { Request } from 'src/app/shared/models/Request/request';
 import { SchoolLeavingCertificateModel } from 'src/app/shared/models/SchoolLeavingCertificateModel/school-leaving-certificate-model';
 import { TranslateTask } from 'src/app/shared/models/TranslateTask/translate-task';
@@ -55,9 +57,11 @@ export class TranslateOrderProcessComponent implements OnInit {
   otherFormImagesList: string[] = [];
   affidavitImageList: string[] = [];
   deedImageList: string[] = [];
+  orderNotificationModel = new OrderNotification();
 
   constructor(private activateRoute: ActivatedRoute, private orderService: OrderService, private taskService: TaskService
-            , private tost: ToastrService, private spinner: NgxSpinnerService, private formBuilder: FormBuilder) {}
+            , private tost: ToastrService, private spinner: NgxSpinnerService, private formBuilder: FormBuilder
+            , private smsService: SmsService) {}
 
   ngOnInit(): void {
     this.invoiceNo = this.activateRoute.snapshot.params['invoiceId'];
@@ -104,6 +108,23 @@ export class TranslateOrderProcessComponent implements OnInit {
 
       if (resp.code === 1) {
         this.tost.success("Update Order Status", "Order Status is Updated Successfully.");
+
+        if (orderStatus == "3") {
+          // need to send complete notification sms
+          this.orderNotificationModel.token = sessionStorage.getItem("authToken");
+          this.orderNotificationModel.flag = sessionStorage.getItem("role");
+          this.orderNotificationModel.orderNumber = this.invoiceNo;
+          this.orderNotificationModel.orderType = "TR";
+
+          this.smsService.sendOrderCompleteNotification(this.orderNotificationModel).subscribe((resp: any) => {
+            if (resp.code === 1) {
+              this.tost.success("Order Completion", "Notification Sent Successfully.");
+            } else {
+              this.tost.error("Order Completion", "Error Occured Sending SMS");
+            }
+          })
+        }
+
       } else {
         this.tost.error("Update Order Status", resp.message);
       }

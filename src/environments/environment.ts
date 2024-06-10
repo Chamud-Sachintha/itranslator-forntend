@@ -9,4 +9,4 @@ export const environment = {
 //     fileDocServerURL: "https://clientapi.itranslate.lk/Legal/",
 //    fileDoc2ServerURL: "https://adminapi.itranslate.lk/Legal/",
 //     devServer: "https://adminapi.itranslate.lk/"
-};
+ };

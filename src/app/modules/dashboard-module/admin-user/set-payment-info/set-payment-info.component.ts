@@ -209,6 +209,7 @@ export class SetPaymentInfoComponent implements OnInit {
 
   getCsPaymentInfo() {
     this.csPaymentForm.controls['amountInArreas'].disable();
+    this.csPaymentForm.controls['fullChargeOfServiceProvision'].disable();
 
     this.requestParamMdel.token = sessionStorage.getItem("authToken");
     this.requestParamMdel.flag = sessionStorage.getItem("role");

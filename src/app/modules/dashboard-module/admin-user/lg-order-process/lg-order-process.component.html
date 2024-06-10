@@ -38,6 +38,7 @@
                                    <tr *ngFor="let eachOrder of lgOrderList">
                                         <td>{{ eachOrder.OrderNo }}</td>
                                         <td *ngIf="eachOrder.Status == '1'">Accepts</td>
+                                        
                                         <td>{{ eachOrder.createTime | date:'short' }}</td>
                                        
                                         <td>
@@ -93,11 +94,7 @@
                                 <h5>{{ this.eachMessage.fromUser }}</h5>
                                 <div class="comment-footer">
                                     <span class="date">{{ eachMessage.time}}</span>
-                                    <span class="label label-info">Pending</span> <span class="action-icons">
-                                        <a href="#" data-abc="true"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" data-abc="true"><i class="fa fa-rotate-right"></i></a>
-                                        <a href="#" data-abc="true"><i class="fa fa-heart"></i></a>
-                                    </span>
+                                   
                                 </div>
                                 <p class="m-b-5 m-t-10">{{ eachMessage.message }}
                                     </p>

@@ -31,9 +31,9 @@ export class CompleteCsOrdersComponent {
     this.requestParamModel.flag = sessionStorage.getItem("role");
     
     this.taskService.getCompleteCSServiceTaskList(this.requestParamModel).subscribe((resp: any) => {
-
+     
       const dataList = JSON.parse(JSON.stringify(resp));
-
+      console.log(dataList)
       if (resp.code === 1) {
         dataList.data[0].forEach((eachRow: TranslateOrder) => {
           this.csServiceTaskList.push(eachRow);

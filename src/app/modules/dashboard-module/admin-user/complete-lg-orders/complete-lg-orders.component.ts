@@ -48,15 +48,33 @@ export class CompleteLgOrdersComponent implements OnInit{
     this.requestMode.token = sessionStorage.getItem("authToken");
     this.requestMode.flag = sessionStorage.getItem("role");
    
-    this.orderService.getLgCompleteList(this.requestMode).subscribe((resp: any) => {
-      this.lgOrderList = resp.data[0];
-      this.lgOrderList.forEach(order => {
-        order.createTime = new Date(order.createTime * 1000); 
-      });
-      console.log('data>>>', this.lgOrderList);
-      
-      this.spinner.hide();
-    })
+    if(sessionStorage.getItem("role") == "SA")
+    {
+      this.orderService.getLgCompleteListSA(this.requestMode).subscribe((resp: any) => {
+        this.lgOrderList = resp.data[0];
+        this.lgOrderList.forEach(order => {
+          order.createTime = new Date(order.createTime * 1000); 
+        });
+        console.log('data>>>', this.lgOrderList);
+        
+        this.spinner.hide();
+      })
+
+    }
+    else{
+      this.orderService.getLgCompleteList(this.requestMode).subscribe((resp: any) => {
+        this.lgOrderList = resp.data[0];
+        this.lgOrderList.forEach(order => {
+          order.createTime = new Date(order.createTime * 1000); 
+        });
+        console.log('data>>>', this.lgOrderList);
+        
+        this.spinner.hide();
+      })
+    }
+   
+
+
     this.spinner.hide();
   }
 

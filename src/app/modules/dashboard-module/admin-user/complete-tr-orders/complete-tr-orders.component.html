@@ -43,6 +43,7 @@
                                         <td *ngIf="eachOrder.orderStatus == '0'">Pending</td>
                                         <td *ngIf="eachOrder.orderStatus == '1'">Taken</td>
                                         <td *ngIf="eachOrder.orderStatus == '2'">Processing</td>
+                                        <td *ngIf="eachOrder.orderStatus == '3'">Complete</td>
                                         <td>LKR. {{ eachOrder.totalAmount }} .00</td>
                                         <td>{{ eachOrder.createTime | date }}</td>
                                         <td>{{ eachOrder.assignedTime | date }}</td>

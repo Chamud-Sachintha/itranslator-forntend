@@ -50,6 +50,11 @@ export class OrderService {
     return this.http.post(path, requestModel);
   }
 
+  getLgCompleteListSA(requestModel: Request) {
+    const path = environment.appURL + "get-SAlg-Complete";
+    return this.http.post(path, requestModel);
+  }
+
   getOrderInfoByInvoice(requestModel: Request) {
     const path = environment.appURL + "get-order-info-by-invoice";
     return this.http.post(path, requestModel);

@@ -44,6 +44,7 @@ export class HomeComponent implements OnInit {
         this.dashboardModel.totalOrderCount = dataList.data[0].totalOrderCount;
         this.dashboardModel.totalNotAssignedCount = dataList.data[0].totalNotAssignedCount;
         this.dashboardModel.totalAssignedCount = dataList.data[0].totalAssignedCount;
+        this.dashboardModel.totalCompletedCount = dataList.data[0].totalNCompletedCount;
       }
     })
   }

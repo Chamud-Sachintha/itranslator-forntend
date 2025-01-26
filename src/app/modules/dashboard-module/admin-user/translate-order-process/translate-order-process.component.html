@@ -50,7 +50,7 @@
                                         <td>{{ eachRow.createTime | date }}</td>
                                         <td>{{ eachRow.assignedTime | date }}</td>
                                         <td>
-                                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" (click)="onClickOpenOrderDocuments(eachRow.serviceId)">Check Documents</button>
+                                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" (click)="onClickOpenOrderDocuments(eachRow.serviceId, i)">Check Documents</button>
                                         </td>
                                     </tr>
                                 </tbody>

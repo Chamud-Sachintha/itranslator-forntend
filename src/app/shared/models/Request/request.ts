@@ -12,4 +12,5 @@ export class Request {
     categoryId!: string;
     categoryName!: string;
     DocName!: string;
+    doc!: any;
 }

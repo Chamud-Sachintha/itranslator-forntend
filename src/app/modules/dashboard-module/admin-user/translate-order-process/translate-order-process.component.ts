@@ -281,12 +281,13 @@ export class TranslateOrderProcessComponent implements OnInit {
     this.nicTranslateModelForm.controls['birthPlace'].disable();
   }
 
-  onClickOpenOrderDocuments(serviceId: string) {
+  onClickOpenOrderDocuments(serviceId: string, doc: any) {
     console.log(serviceId)
     this.requestMode.token = sessionStorage.getItem("authToken");
     this.requestMode.flag = sessionStorage.getItem("role");
     this.requestMode.invoiceNo = this.invoiceNo;
     this.requestMode.serviceId = serviceId;
+    this.requestMode.doc = doc;
 
     this.spinner.show();
     this.orderService.getOrderDocumentsByOrderAndService(this.requestMode).subscribe((resp: any) => {
